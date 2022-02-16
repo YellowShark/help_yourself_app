@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:cloud_chat/common/res/dimens.dart';
 import 'package:cloud_chat/common/routes/routes.dart';
 import 'package:cloud_chat/common/utils/consts.dart';
-import 'package:cloud_chat/di/config/injection.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_chat/ui/base/base_screen.dart';
+import 'package:cloud_chat/ui/stores/splash/splash_view_model.dart';
 import 'package:flutter/material.dart';
 
 const _splashLogoSize = 300.0;
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashScreen extends BaseScreen<SplashViewModel> {
+  SplashScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +47,15 @@ class SplashScreen extends StatelessWidget {
   }
 
   Future _initApp(BuildContext context) async {
-    await Firebase.initializeApp();
-    configureDependencies();
     Timer(
       const Duration(milliseconds: 500),
-          () => Navigator.pushReplacementNamed(context, Routes.login),
+      () async {
+        if (!await viewModel.authorized()) {
+          Navigator.pushReplacementNamed(context, Routes.login);
+          return;
+        }
+        Navigator.pushReplacementNamed(context, Routes.home);
+      },
     );
   }
 }

@@ -8,6 +8,7 @@ abstract class Strings {
 
 class HomeScreenStrings {
   final title = 'Home';
+  final logout = 'Logout';
 }
 
 class ChatDetailsStrings {

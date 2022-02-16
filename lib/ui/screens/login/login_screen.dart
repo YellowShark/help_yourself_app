@@ -1,14 +1,12 @@
-import 'dart:async';
-
 import 'package:cloud_chat/common/res/dimens.dart';
 import 'package:cloud_chat/common/res/strings.dart';
 import 'package:cloud_chat/common/routes/routes.dart';
 import 'package:cloud_chat/common/utils/consts.dart';
 import 'package:cloud_chat/ui/base/base_screen.dart';
 import 'package:cloud_chat/ui/stores/login/login_view_model.dart';
+import 'package:cloud_chat/ui/widgets/base_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 const _logoSize = 200.0;
 
@@ -19,13 +17,10 @@ class LoginScreen extends BaseScreen<LoginViewModel> {
   final _loginFocus = FocusNode();
   final _passwordFocus = FocusNode();
 
-  final _loadingButtonController = RoundedLoadingButtonController();
-
   LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    _listenState(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -102,34 +97,21 @@ class LoginScreen extends BaseScreen<LoginViewModel> {
           ),
           Expanded(
             flex: 1,
-            child: RoundedLoadingButton(
-              color: Colors.deepOrange,
-              controller: _loadingButtonController,
-              onPressed: () async {
-                _loadingButtonController.start();
-                final resOk = await viewModel.signIn();
-                if (resOk) {
-                  _loadingButtonController.success();
-                } else {
-                  _loadingButtonController.reset();
-                }
-              },
-              child: Text(
-                Strings.login.loginButton,
-                style: const TextStyle(fontSize: Dimens.normalFontSize),
-              ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                BaseTextButton(text: Strings.login.loginButton, onTap: () async {
+                  final resOk = await viewModel.signIn();
+                  if (resOk) {
+                    Navigator.pushReplacementNamed(context, Routes.home);
+                  }
+                },)
+              ],
             ),
           )
         ],
       ),
     );
-  }
-
-  void _listenState(BuildContext context) {
-    _loadingButtonController.stateStream.listen((event) {
-      if (event == ButtonState.success) {
-        Timer(const Duration(milliseconds: 500), () => Navigator.pushReplacementNamed(context, Routes.home));
-      }
-    });
   }
 }

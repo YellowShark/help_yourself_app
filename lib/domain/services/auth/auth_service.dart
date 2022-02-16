@@ -1,5 +1,6 @@
-abstract class AuthService {
-  Future<AuthResult> signIn(String email, String password);
-}
+import 'package:firebase_auth/firebase_auth.dart';
 
-enum AuthResult { success, unknownUser, invalidPassword, unknownError }
+abstract class AuthService {
+  Future<UserCredential> signIn(String email, String password);
+  Future logout();
+}

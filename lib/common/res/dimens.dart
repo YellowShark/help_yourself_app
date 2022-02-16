@@ -10,4 +10,6 @@ abstract class Dimens {
 
   static const extraLargeFontSize = 40.0;
   static const normalFontSize = 16.0;
+
+  static const buttonHeight = 48.0;
 }
