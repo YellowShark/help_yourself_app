@@ -17,7 +17,7 @@ class ChatDetailsStrings {
 
 class LoginStrings {
   final title = 'Login';
-  final loginHint = 'Login';
+  final loginHint = 'E-mail';
   final passwordHint = 'Password';
   final loginButton = 'LOGIN';
 }

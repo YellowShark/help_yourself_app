@@ -1,10 +1,14 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:cloud_chat/common/res/dimens.dart';
 import 'package:cloud_chat/common/res/strings.dart';
 import 'package:cloud_chat/common/routes/routes.dart';
 import 'package:cloud_chat/common/utils/consts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 const _logoSize = 200.0;
@@ -83,6 +87,7 @@ class LoginScreen extends StatelessWidget {
                     focusNode: _passwordFocus,
                     decoration: InputDecoration(hintText: Strings.login.passwordHint),
                     textInputAction: TextInputAction.done,
+                    obscureText: true,
                   ),
                 ),
               ],
@@ -93,7 +98,24 @@ class LoginScreen extends StatelessWidget {
             child: RoundedLoadingButton(
               color: Colors.deepOrange,
               controller: _loadingButtonController,
-              onPressed: () async => Timer(const Duration(seconds: 1), () => _loadingButtonController.success()),
+              onPressed: () async {
+                await Firebase.initializeApp();
+                try {
+                  UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      email: _loginController.text,
+                      password: _passwordController.text,
+                  );
+                  log(userCredential.toString());
+                  _loadingButtonController.success();
+                } on FirebaseAuthException catch (e) {
+                  if (e.code == 'user-not-found') {
+                    Fluttertoast.showToast(msg: 'No user found for that email.');
+                  } else if (e.code == 'wrong-password') {
+                    Fluttertoast.showToast(msg: 'Wrong password provided for that user.');
+                  }
+                  _loadingButtonController.reset();
+                }
+              },
               child: Text(
                 Strings.login.loginButton,
                 style: const TextStyle(fontSize: Dimens.normalFontSize),
