@@ -1,19 +1,18 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:cloud_chat/common/res/dimens.dart';
 import 'package:cloud_chat/common/res/strings.dart';
 import 'package:cloud_chat/common/routes/routes.dart';
 import 'package:cloud_chat/common/utils/consts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_chat/ui/base/base_screen.dart';
+import 'package:cloud_chat/ui/stores/login/login_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 const _logoSize = 200.0;
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends BaseScreen<LoginViewModel> {
   final _loginController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -26,11 +25,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _loadingButtonController.stateStream.listen((event) {
-      if (event == ButtonState.success) {
-        Timer(const Duration(milliseconds: 500), () => Navigator.pushReplacementNamed(context, Routes.home));
-      }
-    });
+    _listenState(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -73,21 +68,33 @@ class LoginScreen extends StatelessWidget {
                     horizontal: Dimens.padding24,
                     vertical: Dimens.padding16,
                   ),
-                  child: TextField(
-                    controller: _loginController,
-                    focusNode: _loginFocus,
-                    decoration: InputDecoration(hintText: Strings.login.loginHint),
-                    textInputAction: TextInputAction.next,
+                  child: Observer(
+                    builder: (_) => TextField(
+                      onChanged: (s) => viewModel.onLoginChanged(s),
+                      controller: _loginController,
+                      focusNode: _loginFocus,
+                      decoration: InputDecoration(
+                        hintText: Strings.login.loginHint,
+                        errorText: viewModel.loginError,
+                      ),
+                      textInputAction: TextInputAction.next,
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Dimens.padding24),
-                  child: TextField(
-                    controller: _passwordController,
-                    focusNode: _passwordFocus,
-                    decoration: InputDecoration(hintText: Strings.login.passwordHint),
-                    textInputAction: TextInputAction.done,
-                    obscureText: true,
+                  child: Observer(
+                    builder: (_) => TextField(
+                      onChanged: (s) => viewModel.onPasswordChanged(s),
+                      controller: _passwordController,
+                      focusNode: _passwordFocus,
+                      decoration: InputDecoration(
+                        hintText: Strings.login.passwordHint,
+                        errorText: viewModel.passwordError,
+                      ),
+                      textInputAction: TextInputAction.done,
+                      obscureText: true,
+                    ),
                   ),
                 ),
               ],
@@ -99,20 +106,11 @@ class LoginScreen extends StatelessWidget {
               color: Colors.deepOrange,
               controller: _loadingButtonController,
               onPressed: () async {
-                await Firebase.initializeApp();
-                try {
-                  UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: _loginController.text,
-                      password: _passwordController.text,
-                  );
-                  log(userCredential.toString());
+                _loadingButtonController.start();
+                final resOk = await viewModel.signIn();
+                if (resOk) {
                   _loadingButtonController.success();
-                } on FirebaseAuthException catch (e) {
-                  if (e.code == 'user-not-found') {
-                    Fluttertoast.showToast(msg: 'No user found for that email.');
-                  } else if (e.code == 'wrong-password') {
-                    Fluttertoast.showToast(msg: 'Wrong password provided for that user.');
-                  }
+                } else {
                   _loadingButtonController.reset();
                 }
               },
@@ -125,5 +123,13 @@ class LoginScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _listenState(BuildContext context) {
+    _loadingButtonController.stateStream.listen((event) {
+      if (event == ButtonState.success) {
+        Timer(const Duration(milliseconds: 500), () => Navigator.pushReplacementNamed(context, Routes.home));
+      }
+    });
   }
 }
