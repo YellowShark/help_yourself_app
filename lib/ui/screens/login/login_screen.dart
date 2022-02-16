@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:cloud_chat/common/res/dimens.dart';
 import 'package:cloud_chat/common/res/strings.dart';
+import 'package:cloud_chat/common/routes/routes.dart';
 import 'package:cloud_chat/common/utils/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -7,18 +10,23 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 const _logoSize = 200.0;
 
 class LoginScreen extends StatelessWidget {
-  final loginController = TextEditingController();
-  final passwordController = TextEditingController();
+  final _loginController = TextEditingController();
+  final _passwordController = TextEditingController();
 
-  final loginFocus = FocusNode();
-  final passwordFocus = FocusNode();
+  final _loginFocus = FocusNode();
+  final _passwordFocus = FocusNode();
 
-  final loadingButtonController = RoundedLoadingButtonController();
+  final _loadingButtonController = RoundedLoadingButtonController();
 
   LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    _loadingButtonController.stateStream.listen((event) {
+      if (event == ButtonState.success) {
+        Timer(const Duration(milliseconds: 500), () => Navigator.pushReplacementNamed(context, Routes.home));
+      }
+    });
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -62,8 +70,8 @@ class LoginScreen extends StatelessWidget {
                     vertical: Dimens.padding16,
                   ),
                   child: TextField(
-                    controller: loginController,
-                    focusNode: loginFocus,
+                    controller: _loginController,
+                    focusNode: _loginFocus,
                     decoration: InputDecoration(hintText: Strings.login.loginHint),
                     textInputAction: TextInputAction.next,
                   ),
@@ -71,8 +79,8 @@ class LoginScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Dimens.padding24),
                   child: TextField(
-                    controller: passwordController,
-                    focusNode: passwordFocus,
+                    controller: _passwordController,
+                    focusNode: _passwordFocus,
                     decoration: InputDecoration(hintText: Strings.login.passwordHint),
                     textInputAction: TextInputAction.done,
                   ),
@@ -84,8 +92,8 @@ class LoginScreen extends StatelessWidget {
             flex: 1,
             child: RoundedLoadingButton(
               color: Colors.deepOrange,
-              controller: loadingButtonController,
-              onPressed: () {},
+              controller: _loadingButtonController,
+              onPressed: () async => Timer(const Duration(seconds: 1), () => _loadingButtonController.success()),
               child: Text(
                 Strings.login.loginButton,
                 style: const TextStyle(fontSize: Dimens.normalFontSize),

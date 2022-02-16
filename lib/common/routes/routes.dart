@@ -1,5 +1,6 @@
 abstract class Routes {
-  static String home = '/home_screen';
-  static String chatDetails = '/chat_details';
-  static String login = '/login';
+  static const splash = '/splash';
+  static const home = '/home_screen';
+  static const chatDetails = '/chat_details';
+  static const login = '/login';
 }
