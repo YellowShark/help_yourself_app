@@ -20,8 +20,8 @@ dependencies:
   mobx: ^2.0.5
   flutter_mobx: ^2.0.4
   bubble: ^1.2.1
-  rounded_loading_button: ^2.0.8
   flutter_svg: ^1.0.3
+  fluttertoast: ^8.0.8
 
 dev_dependencies:
   flutter_test:
@@ -29,6 +29,7 @@ dev_dependencies:
   injectable_generator: ^1.5.3
   build_runner: ^2.1.7
   flutter_lints: ^1.0.0
+  mobx_codegen: ^2.0.3
 
 flutter:
   uses-material-design: true

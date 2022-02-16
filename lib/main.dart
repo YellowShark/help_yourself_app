@@ -3,9 +3,15 @@ import 'package:cloud_chat/ui/screens/home/chat_details/chat_details_screen.dart
 import 'package:cloud_chat/ui/screens/home/home_screen.dart';
 import 'package:cloud_chat/ui/screens/login/login_screen.dart';
 import 'package:cloud_chat/ui/screens/splash/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+import 'di/config/injection.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  configureDependencies();
   runApp(const MyApp());
 }
 

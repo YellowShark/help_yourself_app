@@ -3,19 +3,18 @@ import 'dart:async';
 import 'package:cloud_chat/common/res/dimens.dart';
 import 'package:cloud_chat/common/routes/routes.dart';
 import 'package:cloud_chat/common/utils/consts.dart';
+import 'package:cloud_chat/ui/base/base_screen.dart';
+import 'package:cloud_chat/ui/stores/splash/splash_view_model.dart';
 import 'package:flutter/material.dart';
 
 const _splashLogoSize = 300.0;
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashScreen extends BaseScreen<SplashViewModel> {
+  SplashScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Timer(
-      const Duration(seconds: 1),
-      () => Navigator.pushReplacementNamed(context, Routes.login),
-    );
+    _initApp(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -44,6 +43,19 @@ class SplashScreen extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Future _initApp(BuildContext context) async {
+    Timer(
+      const Duration(milliseconds: 500),
+      () async {
+        if (!await viewModel.authorized()) {
+          Navigator.pushReplacementNamed(context, Routes.login);
+          return;
+        }
+        Navigator.pushReplacementNamed(context, Routes.home);
+      },
     );
   }
 }
