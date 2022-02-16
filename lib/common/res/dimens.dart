@@ -7,4 +7,7 @@ abstract class Dimens {
   static const padding24 = 24.0;
   static const padding32 = 32.0;
   static const padding40 = 40.0;
+
+  static const extraLargeFontSize = 40.0;
+  static const normalFontSize = 16.0;
 }
