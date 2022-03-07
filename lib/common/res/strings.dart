@@ -16,6 +16,8 @@ class RegistrationStrings {
   final successfulRegistrationMsg = 'Successful registration!';
   final passwordsNotEqual = 'Passwords are not equal.';
   final invalidEmail = 'Invalid email';
+  final emailAlreadyInUse = 'Email already in use';
+  final weakPassword = 'Weak password';
 }
 
 class HomeScreenStrings {

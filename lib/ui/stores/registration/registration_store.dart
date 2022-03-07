@@ -1,5 +1,6 @@
 import 'package:cloud_chat/common/extensions/extensions.dart';
 import 'package:cloud_chat/common/res/strings.dart';
+import 'package:cloud_chat/domain/interactors/auth/auth_interactor.dart';
 import 'package:cloud_chat/ui/stores/registration/registration_view_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
@@ -24,6 +25,10 @@ abstract class _RegistrationStore with Store implements RegistrationViewModel {
   String _currentPassword = '';
   String _currentPasswordAgain = '';
 
+  final AuthInteractor _interactor;
+
+  _RegistrationStore(this._interactor);
+
   @action
   @override
   void onEmailChanged(String newValue) {
@@ -47,9 +52,21 @@ abstract class _RegistrationStore with Store implements RegistrationViewModel {
 
   @override
   Future<bool> signUp() async {
-    if (_validCredentials()) {
-      // Make request
-      return true;
+    if (!_validCredentials()) {
+      return false;
+    }
+    final result = await _interactor.signUpWithEmail(_currentEmail, _currentPassword);
+    switch(result) {
+      case SignUpResult.success:
+        return true;
+      case SignUpResult.emailAlreadyInUse:
+        emailError = Strings.registration.emailAlreadyInUse;
+        break;
+      case SignUpResult.weakPassword:
+        passwordError = Strings.registration.weakPassword;
+        break;
+      case SignUpResult.unknownError:
+        break;
     }
     return false;
   }
