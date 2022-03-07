@@ -13,7 +13,7 @@ class RegistrationStrings {
   final passwordHint = 'Password';
   final passwordAgainHint = 'Password again';
   final signUpButton = 'SIGN UP';
-  final successfulRegistrationMsg = 'Successful registration!';
+  final successfulRegistrationMsg = 'Successful registration! Now you need to verify your email address.';
   final passwordsNotEqual = 'Passwords are not equal.';
   final invalidEmail = 'Invalid email';
   final emailAlreadyInUse = 'Email already in use';
@@ -39,6 +39,7 @@ class LoginStrings {
   final invalidPassword = 'Wrong password provided for that user.';
   final loginButton = 'LOGIN';
   final signUpButton = 'Sign up';
+  final unverifiedEmail = 'Unverified email address';
 }
 
 class CommonErrorsStrings {

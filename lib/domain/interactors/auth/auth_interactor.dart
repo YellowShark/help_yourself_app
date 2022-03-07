@@ -19,6 +19,9 @@ class AuthInteractor {
         password,
       );
       log(userCredential.toString());
+      if (!(userCredential.user?.emailVerified ?? false)) {
+        return AuthResult.unverifiedEmail;
+      }
       await _authManager.saveToken(userCredential.user?.uid ?? '');
       return AuthResult.success;
     } on FirebaseAuthException catch (e) {
@@ -39,6 +42,7 @@ class AuthInteractor {
     try {
       UserCredential userCredential = await _authService.signUpWithEmail(email, password);
       log(userCredential.toString());
+      userCredential.user?.sendEmailVerification();
       return SignUpResult.success;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -60,6 +64,6 @@ class AuthInteractor {
   Future<bool> authorized() => _authManager.authorized();
 }
 
-enum AuthResult { success, unknownUser, invalidPassword, unknownError }
+enum AuthResult { success, unknownUser, invalidPassword, unknownError, unverifiedEmail }
 
 enum SignUpResult { success, weakPassword, emailAlreadyInUse, unknownError }

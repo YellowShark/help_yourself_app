@@ -107,7 +107,10 @@ class RegistrationScreen extends BaseScreen<RegistrationViewModel> {
                   onTap: () async {
                     final resOk = await viewModel.signUp();
                     if (resOk) {
-                      Fluttertoast.showToast(msg: Strings.registration.successfulRegistrationMsg);
+                      Fluttertoast.showToast(
+                        msg: Strings.registration.successfulRegistrationMsg,
+                        toastLength: Toast.LENGTH_LONG,
+                      );
                       Navigator.pop(context);
                     }
                   },
