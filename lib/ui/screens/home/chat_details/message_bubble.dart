@@ -1,7 +1,7 @@
 import 'package:bubble/bubble.dart';
-import 'package:cloud_chat/common/utils/consts.dart';
-import 'package:cloud_chat/domain/entities/message/message.dart';
 import 'package:flutter/material.dart';
+import 'package:help_yourself_app/common/utils/consts.dart';
+import 'package:help_yourself_app/domain/entities/message/message.dart';
 
 import '../../../../common/res/dimens.dart';
 

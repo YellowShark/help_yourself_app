@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:cloud_chat/common/res/dimens.dart';
-import 'package:cloud_chat/common/routes/routes.dart';
-import 'package:cloud_chat/common/utils/consts.dart';
-import 'package:cloud_chat/ui/base/base_screen.dart';
-import 'package:cloud_chat/ui/stores/splash/splash_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:help_yourself_app/common/res/dimens.dart';
+import 'package:help_yourself_app/common/routes/routes.dart';
+import 'package:help_yourself_app/common/utils/consts.dart';
+import 'package:help_yourself_app/ui/base/base_screen.dart';
+import 'package:help_yourself_app/ui/stores/splash/splash_view_model.dart';
 
 const _splashLogoSize = 300.0;
 
@@ -31,14 +31,15 @@ class SplashScreen extends BaseScreen<SplashViewModel> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: const [
               Center(
-                  child: Padding(
-                padding: EdgeInsets.only(
-                  bottom: Dimens.padding24,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    bottom: Dimens.padding24,
+                  ),
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
                 ),
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-              )),
+              ),
             ],
           )
         ],

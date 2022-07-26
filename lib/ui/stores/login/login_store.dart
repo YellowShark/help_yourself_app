@@ -1,7 +1,6 @@
-import 'package:cloud_chat/common/res/strings.dart';
-import 'package:cloud_chat/domain/interactors/auth/auth_interactor.dart';
-import 'package:cloud_chat/domain/services/auth/auth_service.dart';
-import 'package:cloud_chat/ui/stores/login/login_view_model.dart';
+import 'package:help_yourself_app/common/res/strings.dart';
+import 'package:help_yourself_app/domain/interactors/auth/auth_interactor.dart';
+import 'package:help_yourself_app/ui/stores/login/login_view_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 

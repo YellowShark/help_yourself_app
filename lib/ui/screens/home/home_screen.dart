@@ -1,11 +1,11 @@
-import 'package:cloud_chat/common/res/dimens.dart';
-import 'package:cloud_chat/common/res/strings.dart';
-import 'package:cloud_chat/common/routes/routes.dart';
-import 'package:cloud_chat/ui/base/base_screen.dart';
-import 'package:cloud_chat/ui/screens/home/chat_card.dart';
-import 'package:cloud_chat/ui/stores/home/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:help_yourself_app/common/res/dimens.dart';
+import 'package:help_yourself_app/common/res/strings.dart';
+import 'package:help_yourself_app/common/routes/routes.dart';
+import 'package:help_yourself_app/ui/base/base_screen.dart';
+import 'package:help_yourself_app/ui/screens/home/chat_card.dart';
+import 'package:help_yourself_app/ui/stores/home/home_view_model.dart';
 
 import '../../../domain/entities/chat/chat.dart';
 

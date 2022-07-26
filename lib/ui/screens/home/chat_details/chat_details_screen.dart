@@ -1,9 +1,9 @@
-import 'package:cloud_chat/common/res/dimens.dart';
-import 'package:cloud_chat/common/res/strings.dart';
-import 'package:cloud_chat/domain/entities/message/message.dart';
-import 'package:cloud_chat/ui/screens/home/chat_details/message_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:help_yourself_app/common/res/dimens.dart';
+import 'package:help_yourself_app/common/res/strings.dart';
+import 'package:help_yourself_app/domain/entities/message/message.dart';
+import 'package:help_yourself_app/ui/screens/home/chat_details/message_bubble.dart';
 
 import '../../../../domain/entities/chat/chat.dart';
 
@@ -46,7 +46,8 @@ class ChatDetailsScreen extends StatelessWidget {
                       controller: messageController,
                       focusNode: messageFocus,
                       decoration: InputDecoration(
-                          hintText: Strings.chatDetails.messageHint, contentPadding: const EdgeInsets.all(Dimens.padding8)),
+                          hintText: Strings.chatDetails.messageHint,
+                          contentPadding: const EdgeInsets.all(Dimens.padding8)),
                     ),
                   ),
                 ),
@@ -56,11 +57,7 @@ class ChatDetailsScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(Dimens.padding8),
                     child: ElevatedButton(
                       onPressed: () {},
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          const CircleBorder()
-                        )
-                      ),
+                      style: ButtonStyle(shape: MaterialStateProperty.all(const CircleBorder())),
                       child: const Center(
                         child: Padding(
                           padding: EdgeInsets.only(left: Dimens.padding4),

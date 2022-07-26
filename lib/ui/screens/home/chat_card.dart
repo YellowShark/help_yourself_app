@@ -1,6 +1,6 @@
-import 'package:cloud_chat/common/utils/consts.dart';
-import 'package:cloud_chat/domain/entities/chat/chat.dart';
 import 'package:flutter/material.dart';
+import 'package:help_yourself_app/common/utils/consts.dart';
+import 'package:help_yourself_app/domain/entities/chat/chat.dart';
 
 class ChatCard extends StatelessWidget {
   final void Function(Chat chat) onClick;

@@ -1,5 +1,5 @@
-import 'package:cloud_chat/domain/interactors/auth/auth_interactor.dart';
-import 'package:cloud_chat/ui/stores/splash/splash_view_model.dart';
+import 'package:help_yourself_app/domain/interactors/auth/auth_interactor.dart';
+import 'package:help_yourself_app/ui/stores/splash/splash_view_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 

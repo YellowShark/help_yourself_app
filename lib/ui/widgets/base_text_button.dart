@@ -1,5 +1,5 @@
-import 'package:cloud_chat/common/res/dimens.dart';
 import 'package:flutter/material.dart';
+import 'package:help_yourself_app/common/res/dimens.dart';
 
 const _buttonMaxWidth = 500.0;
 

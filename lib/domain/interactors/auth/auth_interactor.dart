@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:cloud_chat/domain/services/auth/auth_service.dart';
-import 'package:cloud_chat/domain/services/auth_manager/auth_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:help_yourself_app/domain/services/auth/auth_service.dart';
+import 'package:help_yourself_app/domain/services/auth_manager/auth_manager.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
