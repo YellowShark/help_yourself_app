@@ -23,7 +23,7 @@ class LoginScreen extends BasePage<LoginViewModel> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(Strings.login.title),
+        title: const Text('Strings.login.title'),
       ),
       body: Column(
         children: [
@@ -31,8 +31,8 @@ class LoginScreen extends BasePage<LoginViewModel> {
             flex: 2,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: const [
-                Padding(
+              children: [
+                const Padding(
                   padding: EdgeInsets.all(Dimens.padding24),
                   child: SizedBox(
                     width: _logoSize,
@@ -43,8 +43,8 @@ class LoginScreen extends BasePage<LoginViewModel> {
                   ),
                 ),
                 Text(
-                  Strings.appName,
-                  style: TextStyle(
+                  Strings.appName(),
+                  style: const TextStyle(
                     fontSize: Dimens.extraLargeFontSize,
                     fontWeight: FontWeight.bold,
                   ),
@@ -68,7 +68,7 @@ class LoginScreen extends BasePage<LoginViewModel> {
                       controller: _loginController,
                       focusNode: _loginFocus,
                       decoration: InputDecoration(
-                        hintText: Strings.login.loginHint,
+                        hintText: 'Strings.login.loginHint',
                         errorText: viewModel.loginError,
                       ),
                       textInputAction: TextInputAction.next,
@@ -83,7 +83,7 @@ class LoginScreen extends BasePage<LoginViewModel> {
                       controller: _passwordController,
                       focusNode: _passwordFocus,
                       decoration: InputDecoration(
-                        hintText: Strings.login.passwordHint,
+                        hintText: 'Strings.login.passwordHint',
                         errorText: viewModel.passwordError,
                       ),
                       textInputAction: TextInputAction.done,
@@ -100,12 +100,15 @@ class LoginScreen extends BasePage<LoginViewModel> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                BaseTextButton(text: Strings.login.loginButton, onTap: () async {
-                  final resOk = await viewModel.signIn();
-                  if (resOk) {
-                    //Navigator.pushReplacementNamed(context, Routes.home);
-                  }
-                },)
+                BaseTextButton(
+                  text: 'Strings.login.loginButton',
+                  onTap: () async {
+                    final resOk = await viewModel.signIn();
+                    if (resOk) {
+                      //Navigator.pushReplacementNamed(context, Routes.home);
+                    }
+                  },
+                )
               ],
             ),
           )

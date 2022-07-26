@@ -18,7 +18,7 @@ class ChatDetailsScreen extends StatelessWidget {
     _initScreen(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(Strings.chatDetails.title),
+        title: Text('Strings.chatDetails.title'),
       ),
       body: Column(
         children: [
@@ -46,7 +46,7 @@ class ChatDetailsScreen extends StatelessWidget {
                       controller: messageController,
                       focusNode: messageFocus,
                       decoration: InputDecoration(
-                          hintText: Strings.chatDetails.messageHint,
+                          hintText: 'Strings.chatDetails.messageHint',
                           contentPadding: const EdgeInsets.all(Dimens.padding8)),
                     ),
                   ),

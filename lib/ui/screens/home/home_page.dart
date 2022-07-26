@@ -15,7 +15,7 @@ class HomePage extends BasePage<HomeViewModel> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(Strings.home.title),
+        title: Text(Strings.home.title()),
       ),
       body: Observer(builder: (_) {
         final list = List.generate(

@@ -48,10 +48,10 @@ abstract class _LoginStore with Store implements LoginViewModel {
       case AuthResult.success:
         return true;
       case AuthResult.unknownUser:
-        loginError = Strings.login.unknownUser;
+        //loginError = Strings.login.unknownUser;
         break;
       case AuthResult.invalidPassword:
-        passwordError = Strings.login.invalidPassword;
+        //passwordError = Strings.login.invalidPassword;
         break;
       case AuthResult.unknownError:
         break;
@@ -66,11 +66,11 @@ abstract class _LoginStore with Store implements LoginViewModel {
 
   bool _validCredentials() {
     if (_currentLogin.isEmpty) {
-      loginError = Strings.commonErrors.emptyField;
+      //loginError = Strings.commonErrors.emptyField;
       return false;
     }
     if (_currentPassword.isEmpty) {
-      passwordError = Strings.commonErrors.emptyField;
+      //passwordError = Strings.commonErrors.emptyField;
       return false;
     }
     return true;
