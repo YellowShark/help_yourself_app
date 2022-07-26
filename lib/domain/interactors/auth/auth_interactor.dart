@@ -14,20 +14,23 @@ class AuthInteractor {
 
   Future<AuthResult> signIn(String email, String password) async {
     try {
-      UserCredential userCredential = await _authService.signIn(email, password,);
+      UserCredential userCredential = await _authService.signIn(
+        email,
+        password,
+      );
       log(userCredential.toString());
       await _authManager.saveToken(userCredential.user?.uid ?? '');
       return AuthResult.success;
     } on FirebaseAuthException catch (e) {
-    log(e.toString());
-    if (e.code == 'user-not-found') {
-    return AuthResult.unknownUser;
-    } else if (e.code == 'wrong-password') {
-    return AuthResult.invalidPassword;
-    }
+      log(e.toString());
+      if (e.code == 'user-not-found') {
+        return AuthResult.unknownUser;
+      } else if (e.code == 'wrong-password') {
+        return AuthResult.invalidPassword;
+      }
     } on Exception catch (ex) {
-    log(ex.toString());
-    return AuthResult.unknownError;
+      log(ex.toString());
+      return AuthResult.unknownError;
     }
     return AuthResult.unknownError;
   }

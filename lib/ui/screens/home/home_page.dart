@@ -4,7 +4,7 @@ import 'package:help_yourself_app/common/res/dimens.dart';
 import 'package:help_yourself_app/common/res/strings.dart';
 import 'package:help_yourself_app/ui/base/base_page.dart';
 import 'package:help_yourself_app/ui/screens/home/chat_card.dart';
-import 'package:help_yourself_app/ui/stores/home/home_view_model.dart';
+import 'package:help_yourself_app/ui/stores/home/home_store.dart';
 
 import '../../../domain/entities/chat/chat.dart';
 

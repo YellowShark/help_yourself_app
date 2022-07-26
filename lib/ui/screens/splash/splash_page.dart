@@ -1,12 +1,8 @@
-import 'dart:async';
-
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:help_yourself_app/common/res/dimens.dart';
-import 'package:help_yourself_app/common/routes/router.dart';
 import 'package:help_yourself_app/common/utils/consts.dart';
 import 'package:help_yourself_app/ui/base/base_page.dart';
-import 'package:help_yourself_app/ui/stores/splash/splash_view_model.dart';
+import 'package:help_yourself_app/ui/stores/splash/splash_store.dart';
 
 const _splashLogoSize = 300.0;
 
@@ -15,7 +11,6 @@ class SplashPage extends BasePage<SplashViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    _initApp(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -45,15 +40,6 @@ class SplashPage extends BasePage<SplashViewModel> {
           )
         ],
       ),
-    );
-  }
-
-  Future _initApp(BuildContext context) async {
-    Timer(
-      const Duration(milliseconds: 800),
-      () async {
-        context.router.push(HomeRoute());
-      },
     );
   }
 }
