@@ -1,5 +1,5 @@
-name: cloud_chat
-description: Secure cloud chat.
+name: help_yourself_app
+description: Mobile application for self-psychotherapy.
 publish_to: 'none'
 
 environment:
