@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:help_yourself_app/common/res/dimens.dart';
 import 'package:help_yourself_app/common/res/strings.dart';
-import 'package:help_yourself_app/common/routes/routes.dart';
 import 'package:help_yourself_app/common/utils/consts.dart';
-import 'package:help_yourself_app/ui/base/base_screen.dart';
+import 'package:help_yourself_app/ui/base/base_page.dart';
 import 'package:help_yourself_app/ui/stores/login/login_view_model.dart';
 import 'package:help_yourself_app/ui/widgets/base_text_button.dart';
 
 const _logoSize = 200.0;
 
-class LoginScreen extends BaseScreen<LoginViewModel> {
+class LoginScreen extends BasePage<LoginViewModel> {
   final _loginController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -104,7 +103,7 @@ class LoginScreen extends BaseScreen<LoginViewModel> {
                 BaseTextButton(text: Strings.login.loginButton, onTap: () async {
                   final resOk = await viewModel.signIn();
                   if (resOk) {
-                    Navigator.pushReplacementNamed(context, Routes.home);
+                    //Navigator.pushReplacementNamed(context, Routes.home);
                   }
                 },)
               ],

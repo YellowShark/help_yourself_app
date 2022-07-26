@@ -1,16 +1,17 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:help_yourself_app/common/res/dimens.dart';
-import 'package:help_yourself_app/common/routes/routes.dart';
+import 'package:help_yourself_app/common/routes/router.dart';
 import 'package:help_yourself_app/common/utils/consts.dart';
-import 'package:help_yourself_app/ui/base/base_screen.dart';
+import 'package:help_yourself_app/ui/base/base_page.dart';
 import 'package:help_yourself_app/ui/stores/splash/splash_view_model.dart';
 
 const _splashLogoSize = 300.0;
 
-class SplashScreen extends BaseScreen<SplashViewModel> {
-  SplashScreen({Key? key}) : super(key: key);
+class SplashPage extends BasePage<SplashViewModel> {
+  SplashPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +50,9 @@ class SplashScreen extends BaseScreen<SplashViewModel> {
 
   Future _initApp(BuildContext context) async {
     Timer(
-      const Duration(milliseconds: 500),
+      const Duration(milliseconds: 800),
       () async {
-        if (!await viewModel.authorized()) {
-          Navigator.pushReplacementNamed(context, Routes.login);
-          return;
-        }
-        Navigator.pushReplacementNamed(context, Routes.home);
+        context.router.push(HomeRoute());
       },
     );
   }
