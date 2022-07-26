@@ -15,21 +15,23 @@ import '../../data/services/auth_manager/secure_auth_manager.dart' as _i7;
 import '../../domain/interactors/auth/auth_interactor.dart' as _i10;
 import '../../domain/services/auth/auth_service.dart' as _i8;
 import '../../domain/services/auth_manager/auth_manager.dart' as _i6;
-import '../../ui/stores/home/home_store.dart' as _i11;
-import '../../ui/stores/splash/splash_store.dart' as _i12;
+import '../../ui/screens/home/home_store.dart' as _i11;
+import '../../ui/screens/splash/splash_store.dart' as _i12;
 import '../modules/firebase_module.dart' as _i13;
 import '../modules/secure_storage_module.dart'
     as _i14; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
-_i1.GetIt $initGetIt(_i1.GetIt get,
-    {String? environment, _i2.EnvironmentFilter? environmentFilter}) {
+Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
+    {String? environment, _i2.EnvironmentFilter? environmentFilter}) async {
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final firebaseModule = _$FirebaseModule();
   final secureStorageModule = _$SecureStorageModule();
   gh.singleton<_i3.AppRouter>(_i3.AppRouter());
-  gh.factory<_i4.FirebaseAuth>(() => firebaseModule.firebaseAuth);
+  await gh.singletonAsync<_i4.FirebaseAuth>(
+      () => firebaseModule.getFirebaseAuth(),
+      preResolve: true);
   gh.lazySingleton<_i5.FlutterSecureStorage>(
       () => secureStorageModule.secureStorage);
   gh.lazySingleton<_i6.AuthManager>(

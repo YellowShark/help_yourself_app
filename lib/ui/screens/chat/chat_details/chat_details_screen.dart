@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:help_yourself_app/common/res/dimens.dart';
-import 'package:help_yourself_app/common/res/strings.dart';
+import 'package:help_yourself_app/domain/entities/chat/chat.dart';
 import 'package:help_yourself_app/domain/entities/message/message.dart';
-import 'package:help_yourself_app/ui/screens/home/chat_details/message_bubble.dart';
-
-import '../../../../domain/entities/chat/chat.dart';
+import 'package:help_yourself_app/ui/screens/chat/chat_details/message_bubble.dart';
 
 class ChatDetailsScreen extends StatelessWidget {
   final messageController = TextEditingController();
