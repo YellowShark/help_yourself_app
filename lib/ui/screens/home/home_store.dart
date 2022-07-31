@@ -10,13 +10,12 @@ part 'home_store.g.dart';
 class HomeStore = _HomeStore with _$HomeStore;
 
 abstract class _HomeStore with Store implements HomeViewModel {
-  @override
-  final AppRouter appRouter;
+  final AppRouter _appRouter;
   final AuthInteractor _interactor;
 
   _HomeStore(
     this._interactor,
-    this.appRouter,
+    this._appRouter,
   );
 
   @override

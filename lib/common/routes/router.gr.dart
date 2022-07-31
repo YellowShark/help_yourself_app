@@ -28,13 +28,20 @@ class _$AppRouter extends RootStackRouter {
           routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
       return MaterialPageX<dynamic>(
           routeData: routeData, child: HomePage(key: args.key));
+    },
+    AddEmotionRoute.name: (routeData) {
+      final args = routeData.argsAs<AddEmotionRouteArgs>(
+          orElse: () => const AddEmotionRouteArgs());
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: AddEmotionPage(key: args.key));
     }
   };
 
   @override
   List<RouteConfig> get routes => [
         RouteConfig(SplashRoute.name, path: '/'),
-        RouteConfig(HomeRoute.name, path: '/home-page')
+        RouteConfig(HomeRoute.name, path: '/home-page'),
+        RouteConfig(AddEmotionRoute.name, path: '/add-emotion-page')
       ];
 }
 
@@ -76,5 +83,26 @@ class HomeRouteArgs {
   @override
   String toString() {
     return 'HomeRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [AddEmotionPage]
+class AddEmotionRoute extends PageRouteInfo<AddEmotionRouteArgs> {
+  AddEmotionRoute({Key? key})
+      : super(AddEmotionRoute.name,
+            path: '/add-emotion-page', args: AddEmotionRouteArgs(key: key));
+
+  static const String name = 'AddEmotionRoute';
+}
+
+class AddEmotionRouteArgs {
+  const AddEmotionRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'AddEmotionRouteArgs{key: $key}';
   }
 }
