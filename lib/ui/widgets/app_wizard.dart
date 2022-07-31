@@ -36,7 +36,14 @@ class _AppWizardState extends State<AppWizard> {
   }
 
   List<Step> get _steps => widget.steps.entries
-      .mapIndexed((i, step) => Step(title: Text(step.key), content: step.value, isActive: _currentStep >= i))
+      .mapIndexed(
+        (i, step) => Step(
+          title: Text(step.key),
+          content: step.value,
+          isActive: _currentStep >= i,
+          state: _currentStep >= i + 1 ? StepState.complete : StepState.indexed,
+        ),
+      )
       .toList();
 
   bool _isLastStep() => _currentStep == (_steps.length - 1);
