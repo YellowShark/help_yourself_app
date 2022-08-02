@@ -6,6 +6,7 @@ class AppWizard extends StatefulWidget {
   final Map<String, Widget> steps;
   final Widget Function(BuildContext context, ControlsDetails controls)? controlsBuilder;
   final bool showControls;
+  final int? currentStep;
 
   const AppWizard({
     Key? key,
@@ -13,6 +14,7 @@ class AppWizard extends StatefulWidget {
     required this.steps,
     this.showControls = true,
     this.controlsBuilder,
+    this.currentStep,
   }) : super(key: key);
 
   @override
@@ -20,7 +22,23 @@ class AppWizard extends StatefulWidget {
 }
 
 class _AppWizardState extends State<AppWizard> {
-  var _currentStep = 0;
+  late var _currentStep = widget.currentStep ?? 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _initStep();
+  }
+
+  @override
+  void didUpdateWidget(covariant AppWizard oldWidget) {
+    if (widget.currentStep != oldWidget.currentStep && widget.currentStep != null) {
+      setState(() {
+        _currentStep = widget.currentStep!;
+      });
+    }
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +48,6 @@ class _AppWizardState extends State<AppWizard> {
       currentStep: _currentStep,
       onStepContinue: () => setState(() => _isLastStep() ? widget.onComplete() : _currentStep++),
       onStepCancel: () => !_isFirstStep() ? setState(() => _currentStep--) : null,
-      onStepTapped: (step) => setState(() => _currentStep = step),
       controlsBuilder: widget.showControls ? widget.controlsBuilder : (_, __) => Container(),
     );
   }
@@ -49,4 +66,12 @@ class _AppWizardState extends State<AppWizard> {
   bool _isLastStep() => _currentStep == (_steps.length - 1);
 
   bool _isFirstStep() => _currentStep == 0;
+
+  void _initStep() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      setState(() {
+        _currentStep = widget.currentStep ?? 0;
+      });
+    });
+  }
 }

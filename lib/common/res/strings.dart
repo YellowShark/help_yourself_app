@@ -10,6 +10,10 @@ class AddEmotionStrings {
   String title() => Intl.message('Новое событие');
   String chooseEmotion() => Intl.message('Выберите эмоцию');
   String details() => Intl.message('Детали');
+  String search() => Intl.message('Поиск');
+  String next() => Intl.message('Далее');
+  String prev() => Intl.message('Назад');
+  String save() => Intl.message('Сохранить');
 }
 
 class HomeScreenStrings {
