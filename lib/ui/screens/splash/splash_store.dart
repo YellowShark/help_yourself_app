@@ -12,13 +12,12 @@ const _waitDelay = Duration(milliseconds: 800);
 class SplashStore = _SplashStore with _$SplashStore;
 
 abstract class _SplashStore with Store implements SplashViewModel {
-  @override
-  final AppRouter appRouter;
+  final AppRouter _appRouter;
   final AuthInteractor _interactor;
 
   _SplashStore(
     this._interactor,
-    this.appRouter,
+    this._appRouter,
   ) {
     _init();
   }
@@ -26,7 +25,7 @@ abstract class _SplashStore with Store implements SplashViewModel {
   @override
   Future<bool> authorized() => _interactor.authorized();
 
-  Future _init() => Future.delayed(_waitDelay, () => appRouter.replace(HomeRoute()));
+  Future _init() => Future.delayed(_waitDelay, () => _appRouter.replace(AddEmotionRoute()));
 }
 
 abstract class SplashViewModel extends BaseViewModel {

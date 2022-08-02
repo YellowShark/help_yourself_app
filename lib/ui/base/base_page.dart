@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:help_yourself_app/di/config/injection.dart';
 import 'package:help_yourself_app/ui/base/base_view_model.dart';
 
@@ -13,9 +12,12 @@ abstract class BasePage<VM extends BaseViewModel> extends StatelessWidget {
 
   AppBar? appBar(BuildContext context) => null;
 
+  Widget? bottomBar(BuildContext context) => null;
+
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: appBar(context),
-    body: Observer(builder: (_) => SafeArea(child: content(context))),
-  );
+        appBar: appBar(context),
+        body: SafeArea(child: content(context)),
+        bottomNavigationBar: bottomBar(context),
+      );
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_yourself_app/common/res/dimens.dart';
 
 import 'common/routes/router.dart';
 import 'di/config/injection.dart';
@@ -19,7 +20,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       theme: ThemeData(
         primarySwatch: Colors.indigo,
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size.fromHeight(Dimens.buttonHeight),
+          )
+        )
       ),
       routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.dobrodeev.cloud_chat">
    <application
-        android:label="cloud_chat"
+        android:label="Help Yourself"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
