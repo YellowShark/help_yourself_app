@@ -5,6 +5,7 @@ abstract class Strings {
     static final home = HomeScreenStrings();
     static final addEmotion = AddEmotionStrings();
     static final main = MainStrings();
+    static final video = VideoScreenStrings();
 }
 
 class MainStrings {
@@ -28,4 +29,11 @@ class AddEmotionStrings {
 class HomeScreenStrings {
   String title() => Intl.message('Home');
   String logout() => Intl.message('Logout');
+}
+
+class VideoScreenStrings {
+  String title() => Intl.message('Видео');
+  String videoTitle() => Intl.message('Название');
+  String videoChannel() => Intl.message('Автор');
+
 }
