@@ -1,12 +1,14 @@
 import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
 
 class EmotionNote {
+  final int id;
   final List<Emotion> emotions;
   final String name;
   final String comment;
   final int date;
 
   EmotionNote({
+    this.id = 0,
     required this.emotions,
     required this.name,
     required this.comment,
