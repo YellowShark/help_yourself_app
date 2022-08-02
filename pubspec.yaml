@@ -26,6 +26,7 @@ dependencies:
   collection: ^1.16.0
   objectbox: 1.4.1
   objectbox_flutter_libs: 1.4.1
+  youtube_player_flutter: ^8.1.0
 
 dev_dependencies:
   flutter_test:
