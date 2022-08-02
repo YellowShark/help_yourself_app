@@ -35,6 +35,5 @@ class VideoScreenStrings {
   String title() => Intl.message('Видео');
   String videoTitle() => Intl.message('Название');
   String videoChannel() => Intl.message('Автор');
-  String videoLink() => Intl.message('itZMM5gCboo');
 
 }

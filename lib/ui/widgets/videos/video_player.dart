@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../../../common/res/dimens.dart';
 import '../../../common/res/strings.dart';
 
 class VideoPlayer extends StatefulWidget {
   VideoPlayer({Key? key, required this.video}) : super(key: key);
 
-  String video = 'itZMM5gCboo'; // 'itZMM5gCboo'
+  final String video; // 'itZMM5gCboo'
 
   @override
   _VideoPlayerState createState() => _VideoPlayerState();
@@ -77,22 +78,16 @@ class _VideoPlayerState extends State<VideoPlayer> {
   Widget build(BuildContext context) {
     double widthScreen = MediaQuery.of(context).size.width;
     return YoutubePlayerBuilder(
-      onExitFullScreen: () {
-        //SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-      },
       player: YoutubePlayer(
         controller: _controller,
         showVideoProgressIndicator: true,
         progressIndicatorColor: Colors.blueAccent,
         topActions: <Widget>[
-          const SizedBox(width: 8.0),
+          const SizedBox(width: Dimens.padding8),
           Expanded(
             child: Text(
               _controller.metadata.title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-              ),
+              style: Theme.of(context).textTheme.headline5,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ),
@@ -116,7 +111,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
         appBar: AppBar(
           title: Text(
             Strings.video.title(),
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
         body: ListView(
@@ -163,7 +158,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
     );
   }
 
-  Widget get _space => const SizedBox(height: 10);
+  Widget get _space => Dimens.padding8.spacer();
 
   Widget _buttons(double width) {
     return Row(
