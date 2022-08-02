@@ -1,6 +1,7 @@
 import 'package:help_yourself_app/common/routes/router.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion_note.dart';
+import 'package:help_yourself_app/domain/interactors/emotion_notes/emotion_notes_interactor.dart';
 import 'package:help_yourself_app/ui/base/base_view_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
@@ -9,16 +10,26 @@ part 'add_emotion_store.g.dart';
 
 abstract class AddEmotionViewModel extends BaseViewModel {
   List<Emotion> get emotions;
+
   List<Emotion> get selectedEmotions;
+
   int get currentStep;
+
   void onEmotionSelected(Emotion emotion);
+
   void onSearch(String query);
+
   void onNextStep();
+
   void onPrevStep();
+
   void onNameChanged(String text);
+
   void onCommentChanged(String text);
+
   void onDateChanged(DateTime date);
-  void onSave();
+
+  Future onSave();
 }
 
 @LazySingleton(as: AddEmotionViewModel)
@@ -26,9 +37,13 @@ class AddEmotionStore = _AddEmotionStore with _$AddEmotionStore;
 
 abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
   final AppRouter _appRouter;
+  final EmotionNotesInteractor _interactor;
   EmotionNote _emotionNote = EmotionNote.empty();
 
-  _AddEmotionStore(this._appRouter);
+  _AddEmotionStore(
+    this._appRouter,
+    this._interactor,
+  );
 
   @readonly
   List<Emotion> _emotions = Emotion.values;
@@ -88,8 +103,11 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
   }
 
   @override
-  void onSave() {
-    print(_emotionNote);
-    // TODO save in db and navigate to page with notes list
+  Future onSave() async {
+    await _interactor.addNote(_emotionNote);
+    _emotionNote = EmotionNote.empty();
+    _currentStep = 0;
+    _selectedEmotions = [];
+    _appRouter.pop();
   }
 }

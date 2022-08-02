@@ -8,6 +8,8 @@ abstract class BasePage<VM extends BaseViewModel> extends StatelessWidget {
 
   BasePage({Key? key}) : super(key: key);
 
+  void onCreate() => {};
+
   Widget content(BuildContext context);
 
   AppBar? appBar(BuildContext context) => null;
@@ -17,10 +19,13 @@ abstract class BasePage<VM extends BaseViewModel> extends StatelessWidget {
   Widget? floatingActionButton(BuildContext context) => null;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    onCreate();
+    return Scaffold(
         appBar: appBar(context),
         body: SafeArea(child: content(context)),
         bottomNavigationBar: bottomBar(context),
         floatingActionButton: floatingActionButton(context),
       );
+  }
 }
