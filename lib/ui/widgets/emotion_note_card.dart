@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+import 'package:help_yourself_app/common/res/dimens.dart';
+import 'package:help_yourself_app/domain/entities/emotion/emotion_note.dart';
+import 'package:help_yourself_app/ui/widgets/emotion_chip.dart';
+
+class EmotionNoteCard extends StatelessWidget {
+  final EmotionNote note;
+
+  const EmotionNoteCard({
+    Key? key,
+    required this.note,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(Dimens.padding8),
+      child: Padding(
+        padding: const EdgeInsets.all(Dimens.padding8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              note.name,
+              style: Theme.of(context).textTheme.headline5,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Text(
+              note.comment,
+              style: Theme.of(context).textTheme.headline6,
+              overflow: TextOverflow.ellipsis,
+            ),
+            _chips,
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget get _chips => Wrap(
+        children: note.emotions
+            .map(
+              (e) => Padding(
+                padding: const EdgeInsets.only(right: Dimens.padding8),
+                child: EmotionChip(emotion: e),
+              ),
+            )
+            .toList(),
+      );
+}

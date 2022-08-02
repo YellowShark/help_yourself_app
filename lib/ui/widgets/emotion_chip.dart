@@ -5,13 +5,13 @@ import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
 class EmotionChip extends StatelessWidget {
   final Emotion emotion;
   final bool selected;
-  final void Function(Emotion emotion) onClick;
+  final void Function(Emotion emotion)? onClick;
 
   const EmotionChip({
     Key? key,
     required this.emotion,
-    required this.selected,
-    required this.onClick,
+    this.selected = false,
+    this.onClick,
   }) : super(key: key);
 
   EdgeInsetsGeometry get _labelPadding => const EdgeInsets.symmetric(
@@ -28,7 +28,7 @@ class EmotionChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onClick(emotion),
+      onTap: () => onClick?.call(emotion),
       child: Chip(
         padding: EdgeInsets.zero,
         labelPadding: _labelPadding,
