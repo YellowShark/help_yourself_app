@@ -14,10 +14,13 @@ abstract class BasePage<VM extends BaseViewModel> extends StatelessWidget {
 
   Widget? bottomBar(BuildContext context) => null;
 
+  Widget? floatingActionButton(BuildContext context) => null;
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: appBar(context),
         body: SafeArea(child: content(context)),
         bottomNavigationBar: bottomBar(context),
+        floatingActionButton: floatingActionButton(context),
       );
 }

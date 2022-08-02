@@ -34,6 +34,18 @@ class _$AppRouter extends RootStackRouter {
           orElse: () => const AddEmotionRouteArgs());
       return MaterialPageX<dynamic>(
           routeData: routeData, child: AddEmotionPage(key: args.key));
+    },
+    MainRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<MainRouteArgs>(orElse: () => const MainRouteArgs());
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: MainPage(key: args.key));
+    },
+    EmotionsRouteList.name: (routeData) {
+      final args = routeData.argsAs<EmotionsRouteListArgs>(
+          orElse: () => const EmotionsRouteListArgs());
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: EmotionsPageList(key: args.key));
     }
   };
 
@@ -41,7 +53,9 @@ class _$AppRouter extends RootStackRouter {
   List<RouteConfig> get routes => [
         RouteConfig(SplashRoute.name, path: '/'),
         RouteConfig(HomeRoute.name, path: '/home-page'),
-        RouteConfig(AddEmotionRoute.name, path: '/add-emotion-page')
+        RouteConfig(AddEmotionRoute.name, path: '/add-emotion-page'),
+        RouteConfig(MainRoute.name, path: '/main-page'),
+        RouteConfig(EmotionsRouteList.name, path: '/emotions-page-list')
       ];
 }
 
@@ -104,5 +118,47 @@ class AddEmotionRouteArgs {
   @override
   String toString() {
     return 'AddEmotionRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [MainPage]
+class MainRoute extends PageRouteInfo<MainRouteArgs> {
+  MainRoute({Key? key})
+      : super(MainRoute.name,
+            path: '/main-page', args: MainRouteArgs(key: key));
+
+  static const String name = 'MainRoute';
+}
+
+class MainRouteArgs {
+  const MainRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'MainRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [EmotionsPageList]
+class EmotionsRouteList extends PageRouteInfo<EmotionsRouteListArgs> {
+  EmotionsRouteList({Key? key})
+      : super(EmotionsRouteList.name,
+            path: '/emotions-page-list', args: EmotionsRouteListArgs(key: key));
+
+  static const String name = 'EmotionsRouteList';
+}
+
+class EmotionsRouteListArgs {
+  const EmotionsRouteListArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EmotionsRouteListArgs{key: $key}';
   }
 }
