@@ -4,6 +4,13 @@ abstract class Strings {
     static String appName() => Intl.message('Help Yourself');
     static final home = HomeScreenStrings();
     static final addEmotion = AddEmotionStrings();
+    static final main = MainStrings();
+}
+
+class MainStrings {
+  String diary() => Intl.message('Дневник');
+  String videos() => Intl.message('Видео');
+  String profile() => Intl.message('Профиль');
 }
 
 class AddEmotionStrings {

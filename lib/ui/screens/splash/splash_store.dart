@@ -25,7 +25,7 @@ abstract class _SplashStore with Store implements SplashViewModel {
   @override
   Future<bool> authorized() => _interactor.authorized();
 
-  Future _init() => Future.delayed(_waitDelay, () => _appRouter.replace(AddEmotionRoute()));
+  Future _init() => Future.delayed(_waitDelay, () => _appRouter.replace(MainRoute()));
 }
 
 abstract class SplashViewModel extends BaseViewModel {
