@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       theme: ThemeData(
         primarySwatch: Colors.indigo,
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             minimumSize: const Size.fromHeight(Dimens.buttonHeight),

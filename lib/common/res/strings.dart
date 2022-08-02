@@ -14,6 +14,8 @@ class AddEmotionStrings {
   String next() => Intl.message('Далее');
   String prev() => Intl.message('Назад');
   String save() => Intl.message('Сохранить');
+  String name() => Intl.message('Событие');
+  String comment() => Intl.message('Детали, переживания...');
 }
 
 class HomeScreenStrings {

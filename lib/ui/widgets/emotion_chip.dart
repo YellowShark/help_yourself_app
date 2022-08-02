@@ -34,7 +34,6 @@ class EmotionChip extends StatelessWidget {
         labelPadding: _labelPadding,
         label: Text(
           emotion.ruWord,
-          style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: selected ? _bgColor : null,
         side: BorderSide(color: _bgColor),

@@ -32,11 +32,7 @@ class _AppWizardState extends State<AppWizard> {
 
   @override
   void didUpdateWidget(covariant AppWizard oldWidget) {
-    if (widget.currentStep != oldWidget.currentStep && widget.currentStep != null) {
-      setState(() {
-        _currentStep = widget.currentStep!;
-      });
-    }
+    if (widget.currentStep != oldWidget.currentStep && widget.currentStep != null) _initStep();
     super.didUpdateWidget(oldWidget);
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppTextField extends StatelessWidget {
   final String hint;
   final IconData? prefixIcon;
+  final int? maxLines;
   final void Function(String text)? onChanged;
 
   const AppTextField({
@@ -10,6 +11,7 @@ class AppTextField extends StatelessWidget {
     this.hint = '',
     this.prefixIcon,
     this.onChanged,
+    this.maxLines,
   }) : super(key: key);
 
   @override
@@ -20,6 +22,7 @@ class AppTextField extends StatelessWidget {
         border: const OutlineInputBorder(),
         hintText: hint,
       ),
+      maxLines: maxLines,
       onChanged: onChanged,
     );
   }

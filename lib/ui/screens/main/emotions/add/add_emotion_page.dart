@@ -5,6 +5,7 @@ import 'package:help_yourself_app/common/res/strings.dart';
 import 'package:help_yourself_app/ui/base/base_page.dart';
 import 'package:help_yourself_app/ui/screens/main/emotions/add/add_emotion_store.dart';
 import 'package:help_yourself_app/ui/screens/main/emotions/add/steps/choose_emotion_page.dart';
+import 'package:help_yourself_app/ui/screens/main/emotions/add/steps/emotion_details_page.dart';
 import 'package:help_yourself_app/ui/widgets/app_wizard.dart';
 
 class AddEmotionPage extends BasePage<AddEmotionViewModel> {
@@ -24,7 +25,11 @@ class AddEmotionPage extends BasePage<AddEmotionViewModel> {
             onEmotionSelected: viewModel.onEmotionSelected,
             onSearch: viewModel.onSearch,
           ),
-          Strings.addEmotion.details(): Container(),
+          Strings.addEmotion.details(): EmotionDetailsPage(
+            onNameChanged: viewModel.onNameChanged,
+            onCommentChanged: viewModel.onCommentChanged,
+            onDateChanged: viewModel.onDateChanged,
+          ),
         },
       ),
     );
@@ -36,20 +41,20 @@ class AddEmotionPage extends BasePage<AddEmotionViewModel> {
       );
 
   Widget get _nextButton => Padding(
-    padding: const EdgeInsets.all(Dimens.padding16),
-    child: ElevatedButton(
+        padding: const EdgeInsets.all(Dimens.padding16),
+        child: ElevatedButton(
           onPressed: viewModel.onNextStep,
           child: Text(Strings.addEmotion.next()),
         ),
-  );
+      );
 
   Widget get _prevOrSave => Padding(
-    padding: const EdgeInsets.all(Dimens.padding16),
-    child: Column(
+        padding: const EdgeInsets.all(Dimens.padding16),
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ElevatedButton(
-              onPressed: viewModel.onPrevStep,
+              onPressed: viewModel.onSave,
               child: Text(Strings.addEmotion.save()),
             ),
             Dimens.padding16.spacer(),
@@ -59,5 +64,5 @@ class AddEmotionPage extends BasePage<AddEmotionViewModel> {
             ),
           ],
         ),
-  );
+      );
 }
