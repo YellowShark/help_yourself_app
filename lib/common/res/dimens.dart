@@ -16,6 +16,10 @@ abstract class Dimens {
   static const normalFontSize = 16.0;
 
   static const buttonHeight = 48.0;
+
+  static const smallElevation = 6.0;
+
+  static const borderRadius = 16.0;
 }
 
 extension DimensExt on double {

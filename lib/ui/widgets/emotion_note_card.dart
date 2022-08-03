@@ -16,7 +16,7 @@ class EmotionNoteCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.all(Dimens.padding8),
       child: Padding(
-        padding: const EdgeInsets.all(Dimens.padding8),
+        padding: const EdgeInsets.all(Dimens.padding16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -25,11 +25,15 @@ class EmotionNoteCard extends StatelessWidget {
               style: Theme.of(context).textTheme.headline5,
               overflow: TextOverflow.ellipsis,
             ),
-            Text(
-              note.comment,
-              style: Theme.of(context).textTheme.headline6,
-              overflow: TextOverflow.ellipsis,
-            ),
+            if (note.comment.trim().isNotEmpty) ...[
+              Dimens.padding8.spacer(),
+              Text(
+                note.comment,
+                style: Theme.of(context).textTheme.subtitle1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+            Dimens.padding8.spacer(),
             _chips,
           ],
         ),
@@ -42,7 +46,10 @@ class EmotionNoteCard extends StatelessWidget {
             .map(
               (e) => Padding(
                 padding: const EdgeInsets.only(right: Dimens.padding8),
-                child: EmotionChip(emotion: e),
+                child: EmotionChip(
+                  emotion: e,
+                  selected: true,
+                ),
               ),
             )
             .toList(),

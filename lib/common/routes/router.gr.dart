@@ -17,12 +17,6 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    SplashRoute.name: (routeData) {
-      final args = routeData.argsAs<SplashRouteArgs>(
-          orElse: () => const SplashRouteArgs());
-      return MaterialPageX<dynamic>(
-          routeData: routeData, child: SplashPage(key: args.key));
-    },
     HomeRoute.name: (routeData) {
       final args =
           routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
@@ -51,32 +45,11 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   List<RouteConfig> get routes => [
-        RouteConfig(SplashRoute.name, path: '/'),
         RouteConfig(HomeRoute.name, path: '/home-page'),
         RouteConfig(AddEmotionRoute.name, path: '/add-emotion-page'),
         RouteConfig(MainRoute.name, path: '/main-page'),
         RouteConfig(EmotionsRouteList.name, path: '/emotions-page-list')
       ];
-}
-
-/// generated route for
-/// [SplashPage]
-class SplashRoute extends PageRouteInfo<SplashRouteArgs> {
-  SplashRoute({Key? key})
-      : super(SplashRoute.name, path: '/', args: SplashRouteArgs(key: key));
-
-  static const String name = 'SplashRoute';
-}
-
-class SplashRouteArgs {
-  const SplashRouteArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'SplashRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for

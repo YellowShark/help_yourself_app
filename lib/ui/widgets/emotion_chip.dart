@@ -19,8 +19,6 @@ class EmotionChip extends StatelessWidget {
         vertical: Dimens.padding2,
       );
 
-  double get _elevation => 6;
-
   Color get _bgColor => const Color(0xFFff6666);
 
   Color? get _shadowColor => Colors.grey[60];
@@ -34,10 +32,11 @@ class EmotionChip extends StatelessWidget {
         labelPadding: _labelPadding,
         label: Text(
           emotion.ruWord,
+          style: Theme.of(context).textTheme.subtitle2?.copyWith(color: selected ? Colors.white : Colors.black),
         ),
         backgroundColor: selected ? _bgColor : null,
         side: BorderSide(color: _bgColor),
-        elevation: _elevation,
+        elevation: Dimens.smallElevation,
         shadowColor: _shadowColor,
       ),
     );
