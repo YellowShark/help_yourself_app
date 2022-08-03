@@ -26,6 +26,13 @@ mixin _$EmotionsStore on _EmotionsStore, Store {
     });
   }
 
+  final _$updateNotesAsyncAction = AsyncAction('_EmotionsStore.updateNotes');
+
+  @override
+  Future<dynamic> updateNotes() {
+    return _$updateNotesAsyncAction.run(() => super.updateNotes());
+  }
+
   @override
   String toString() {
     return '''

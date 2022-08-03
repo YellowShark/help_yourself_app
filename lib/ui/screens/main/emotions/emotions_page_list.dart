@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:help_yourself_app/common/res/strings.dart';
 import 'package:help_yourself_app/ui/base/base_page.dart';
 import 'package:help_yourself_app/ui/screens/main/emotions/emotions_store.dart';
+import 'package:help_yourself_app/ui/widgets/emotion_note_card.dart';
 
 class EmotionsPageList extends BasePage<EmotionsViewModel> {
   EmotionsPageList({Key? key}) : super(key: key);
@@ -25,11 +26,7 @@ class EmotionsPageList extends BasePage<EmotionsViewModel> {
       builder: (_) => ListView.separated(
         itemCount: viewModel.notes.length,
         separatorBuilder: (_, __) => const VerticalDivider(),
-        itemBuilder: (BuildContext context, int index) => ListTile(
-          title: Text(
-            viewModel.notes[index].name,
-          ),
-        ),
+        itemBuilder: (BuildContext context, int index) => EmotionNoteCard(note: viewModel.notes[index]),
       ),
     );
   }

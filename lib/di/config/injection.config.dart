@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart' as _i6;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i7;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
+import 'package:objectbox/objectbox.dart' as _i9;
 
 import '../../common/routes/router.dart' as _i3;
 import '../../data/interactors/auth/firebase_auth_interactor.dart' as _i19;
@@ -24,15 +25,13 @@ import '../../domain/repositories/emotion_notes/emotion_notes_repository.dart'
     as _i4;
 import '../../domain/services/auth/auth_service.dart' as _i12;
 import '../../domain/services/auth_manager/auth_manager.dart' as _i10;
-import '../../objectbox.g.dart' as _i9;
 import '../../ui/screens/home/home_store.dart' as _i20;
 import '../../ui/screens/main/emotions/add/add_emotion_store.dart' as _i17;
 import '../../ui/screens/main/emotions/emotions_store.dart' as _i16;
 import '../../ui/screens/main/main_store.dart' as _i8;
-import '../../ui/screens/splash/splash_store.dart' as _i21;
-import '../modules/firebase_module.dart' as _i22;
+import '../modules/firebase_module.dart' as _i21;
 import '../modules/local_module.dart'
-    as _i23; // ignore_for_file: unnecessary_lambdas
+    as _i22; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -66,11 +65,9 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       get<_i12.AuthService>(), get<_i10.AuthManager>()));
   gh.factory<_i20.HomeViewModel>(
       () => _i20.HomeStore(get<_i18.AuthInteractor>(), get<_i3.AppRouter>()));
-  gh.factory<_i21.SplashViewModel>(
-      () => _i21.SplashStore(get<_i18.AuthInteractor>(), get<_i3.AppRouter>()));
   return get;
 }
 
-class _$FirebaseModule extends _i22.FirebaseModule {}
+class _$FirebaseModule extends _i21.FirebaseModule {}
 
-class _$LocalModule extends _i23.LocalModule {}
+class _$LocalModule extends _i22.LocalModule {}
