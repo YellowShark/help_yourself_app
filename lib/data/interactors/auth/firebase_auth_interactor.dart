@@ -7,11 +7,11 @@ import 'package:help_yourself_app/domain/services/auth_manager/auth_manager.dart
 import 'package:injectable/injectable.dart';
 
 @Injectable(as:  AuthInteractor)
-class FirebaseAuthInteractor extends AuthInteractor {
+class DefaultAuthInteractor extends AuthInteractor {
   final AuthService _authService;
   final AuthManager _authManager;
 
-  FirebaseAuthInteractor(this._authService, this._authManager);
+  DefaultAuthInteractor(this._authService, this._authManager);
 
   @override
   Future<AuthResult> signIn(String email, String password) async {

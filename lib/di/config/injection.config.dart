@@ -11,27 +11,28 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:objectbox/objectbox.dart' as _i9;
 
 import '../../common/routes/router.dart' as _i3;
-import '../../data/interactors/auth/firebase_auth_interactor.dart' as _i19;
+import '../../data/interactors/auth/firebase_auth_interactor.dart' as _i20;
 import '../../data/interactors/emotion_notes/default_emotion_notes_interactor.dart'
-    as _i15;
+    as _i16;
 import '../../data/repositories/emotion_notes/object_box_emotion_notes_repository.dart'
     as _i5;
-import '../../data/services/auth/firebase_auth_service.dart' as _i13;
-import '../../data/services/auth_manager/secure_auth_manager.dart' as _i11;
-import '../../domain/interactors/auth/auth_interactor.dart' as _i18;
+import '../../data/services/auth/firebase_auth_service.dart' as _i14;
+import '../../data/services/auth_manager/secure_auth_manager.dart' as _i12;
+import '../../domain/interactors/auth/auth_interactor.dart' as _i19;
 import '../../domain/interactors/emotion_notes/emotion_notes_interactor.dart'
-    as _i14;
+    as _i15;
 import '../../domain/repositories/emotion_notes/emotion_notes_repository.dart'
     as _i4;
-import '../../domain/services/auth/auth_service.dart' as _i12;
-import '../../domain/services/auth_manager/auth_manager.dart' as _i10;
-import '../../ui/screens/home/home_store.dart' as _i20;
-import '../../ui/screens/main/emotions/add/add_emotion_store.dart' as _i17;
-import '../../ui/screens/main/emotions/emotions_store.dart' as _i16;
+import '../../domain/services/auth/auth_service.dart' as _i13;
+import '../../domain/services/auth_manager/auth_manager.dart' as _i11;
+import '../../ui/screens/home/home_store.dart' as _i21;
+import '../../ui/screens/main/emotions/add/add_emotion_store.dart' as _i18;
+import '../../ui/screens/main/emotions/emotions_store.dart' as _i17;
 import '../../ui/screens/main/main_store.dart' as _i8;
-import '../modules/firebase_module.dart' as _i21;
+import '../../ui/screens/main/video/video_recommendations_store.dart' as _i10;
+import '../modules/firebase_module.dart' as _i22;
 import '../modules/local_module.dart'
-    as _i22; // ignore_for_file: unnecessary_lambdas
+    as _i23; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -51,23 +52,25 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i8.MainStore(get<_i3.AppRouter>()));
   await gh.singletonAsync<_i9.Store>(() => localModule.objectBoxStore,
       preResolve: true);
-  gh.lazySingleton<_i10.AuthManager>(
-      () => _i11.SecureAuthManager(get<_i7.FlutterSecureStorage>()));
-  gh.lazySingleton<_i12.AuthService>(
-      () => _i13.FirebaseAuthService(get<_i6.FirebaseAuth>()));
-  gh.factory<_i14.EmotionNotesInteractor>(() =>
-      _i15.DefaultEmotionNotesInteractor(get<_i4.EmotionNotesRepository>()));
-  gh.factory<_i16.EmotionsViewModel>(() => _i16.EmotionsStore(
-      get<_i3.AppRouter>(), get<_i14.EmotionNotesInteractor>()));
-  gh.lazySingleton<_i17.AddEmotionViewModel>(() => _i17.AddEmotionStore(
-      get<_i3.AppRouter>(), get<_i14.EmotionNotesInteractor>()));
-  gh.factory<_i18.AuthInteractor>(() => _i19.FirebaseAuthInteractor(
-      get<_i12.AuthService>(), get<_i10.AuthManager>()));
-  gh.factory<_i20.HomeViewModel>(
-      () => _i20.HomeStore(get<_i18.AuthInteractor>(), get<_i3.AppRouter>()));
+  gh.factory<_i10.VideoRecommendationsViewModel>(
+      () => _i10.VideoRecommendationsStore());
+  gh.lazySingleton<_i11.AuthManager>(
+      () => _i12.SecureAuthManager(get<_i7.FlutterSecureStorage>()));
+  gh.lazySingleton<_i13.AuthService>(
+      () => _i14.FirebaseAuthService(get<_i6.FirebaseAuth>()));
+  gh.factory<_i15.EmotionNotesInteractor>(() =>
+      _i16.DefaultEmotionNotesInteractor(get<_i4.EmotionNotesRepository>()));
+  gh.factory<_i17.EmotionsViewModel>(() => _i17.EmotionsStore(
+      get<_i3.AppRouter>(), get<_i15.EmotionNotesInteractor>()));
+  gh.lazySingleton<_i18.AddEmotionViewModel>(() => _i18.AddEmotionStore(
+      get<_i3.AppRouter>(), get<_i15.EmotionNotesInteractor>()));
+  gh.factory<_i19.AuthInteractor>(() => _i20.DefaultAuthInteractor(
+      get<_i13.AuthService>(), get<_i11.AuthManager>()));
+  gh.factory<_i21.HomeViewModel>(
+      () => _i21.HomeStore(get<_i19.AuthInteractor>(), get<_i3.AppRouter>()));
   return get;
 }
 
-class _$FirebaseModule extends _i21.FirebaseModule {}
+class _$FirebaseModule extends _i22.FirebaseModule {}
 
-class _$LocalModule extends _i22.LocalModule {}
+class _$LocalModule extends _i23.LocalModule {}
