@@ -3,17 +3,22 @@ import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion_note.dart';
 import 'package:help_yourself_app/domain/interactors/emotion_notes/emotion_notes_interactor.dart';
 import 'package:help_yourself_app/ui/base/base_view_model.dart';
+import 'package:help_yourself_app/domain/entities/emotion/emotions_category.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
 part 'add_emotion_store.g.dart';
 
 abstract class AddEmotionViewModel extends BaseViewModel {
-  List<Emotion> get emotions;
+  ChooseEmotionState get state;
 
   List<Emotion> get selectedEmotions;
 
+  List<Emotion> get foundEmotions;
+
   int get currentStep;
+
+  EmotionsCategory get selectedCategory;
 
   void onEmotionSelected(Emotion emotion);
 
@@ -30,6 +35,8 @@ abstract class AddEmotionViewModel extends BaseViewModel {
   void onDateChanged(DateTime date);
 
   Future onSave();
+
+  void onCategorySelected(EmotionsCategory category);
 }
 
 @LazySingleton(as: AddEmotionViewModel)
@@ -46,10 +53,16 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
   );
 
   @readonly
-  List<Emotion> _emotions = Emotion.values;
+  ChooseEmotionState _state = ChooseEmotionState.initial;
+
+  @readonly
+  List<Emotion> _foundEmotions = [];
 
   @readonly
   List<Emotion> _selectedEmotions = [];
+
+  @readonly
+  EmotionsCategory _selectedCategory = EmotionsCategory.positive;
 
   @readonly
   int _currentStep = 0;
@@ -68,10 +81,20 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
   @override
   void onSearch(String query) {
     if (query.isEmpty) {
-      _emotions = Emotion.values;
+      _foundEmotions = [];
+      _state = ChooseEmotionState.initial;
     } else {
-      _emotions = Emotion.values.where((e) => e.ruWord.contains(query)).toList();
+      _foundEmotions = Emotion.values.where((e) => e.text.contains(query)).toList();
+      if (_state == ChooseEmotionState.search) return;
+      _state = ChooseEmotionState.search;
     }
+  }
+
+  @action
+  @override
+  void onCategorySelected(EmotionsCategory category) {
+    if (category == _selectedCategory) return;
+    _selectedCategory = category;
   }
 
   @action
@@ -105,9 +128,19 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
   @override
   Future onSave() async {
     await _interactor.addNote(_emotionNote);
+    dispose();
+    _appRouter.pop();
+  }
+
+  @override
+  Future dispose() async {
     _emotionNote = EmotionNote.empty();
     _currentStep = 0;
     _selectedEmotions = [];
-    _appRouter.pop();
+    _state = ChooseEmotionState.initial;
+    _foundEmotions = [];
+    _selectedCategory = EmotionsCategory.positive;
   }
 }
+
+enum ChooseEmotionState { initial, search, }

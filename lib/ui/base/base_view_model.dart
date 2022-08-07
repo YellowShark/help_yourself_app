@@ -1,2 +1,3 @@
-abstract class BaseViewModel {
+class BaseViewModel {
+  Future dispose() async => {};
 }

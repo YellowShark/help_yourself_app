@@ -20,10 +20,11 @@ class AddEmotionPage extends BasePage<AddEmotionViewModel> {
         onComplete: () {},
         steps: {
           Strings.addEmotion.chooseEmotion(): ChooseEmotionPage(
-            emotions: viewModel.emotions,
+            state: viewModel.state,
             selectedEmotions: viewModel.selectedEmotions,
+            foundEmotions: viewModel.foundEmotions,
             onEmotionSelected: viewModel.onEmotionSelected,
-            onSearch: viewModel.onSearch,
+            onSearch: viewModel.onSearch, selectedCategory: viewModel.selectedCategory, onCategorySelected: viewModel.onCategorySelected,
           ),
           Strings.addEmotion.details(): EmotionDetailsPage(
             onNameChanged: viewModel.onNameChanged,
