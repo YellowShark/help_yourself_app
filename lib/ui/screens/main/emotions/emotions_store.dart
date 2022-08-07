@@ -43,6 +43,9 @@ abstract class _EmotionsStore with Store implements EmotionsViewModel {
     await _initNotes();
   }
 
+  @override
+  Future dispose() async {}
+
   Future _initNotes() async {
     _interactor.getAllNotes().listen((notes) {
       _notes = notes;

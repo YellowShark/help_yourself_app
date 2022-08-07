@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:help_yourself_app/common/res/dimens.dart';
+import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion_note.dart';
 import 'package:help_yourself_app/ui/widgets/emotion_chip.dart';
 
@@ -46,8 +47,9 @@ class EmotionNoteCard extends StatelessWidget {
             .map(
               (e) => Padding(
                 padding: const EdgeInsets.only(right: Dimens.padding8),
-                child: EmotionChip(
-                  emotion: e,
+                child: AppChip<Emotion>(
+                  value: e,
+                  toText: (e) => e.text,
                   selected: true,
                 ),
               ),
