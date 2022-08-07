@@ -5,6 +5,8 @@ class AppChip<T> extends StatelessWidget {
   final T value;
   final bool selected;
   final void Function(T value)? onClick;
+  final void Function(T value)? onLongPress;
+  final void Function(T value)? onLongPressEnd;
   final String Function(T value) toText;
   final Color primaryColor;
   final Color secondaryColor;
@@ -17,6 +19,8 @@ class AppChip<T> extends StatelessWidget {
     this.primaryColor = const Color(0xFFff6666),
     this.secondaryColor = Colors.white,
     this.onClick,
+    this.onLongPress,
+    this.onLongPressEnd,
   }) : super(key: key);
 
   EdgeInsetsGeometry get _labelPadding => const EdgeInsets.symmetric(
@@ -30,6 +34,8 @@ class AppChip<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => onClick?.call(value),
+      onLongPress: () => onLongPress?.call(value),
+      onLongPressEnd: (d) => onLongPressEnd?.call(value),
       child: Chip(
         padding: EdgeInsets.zero,
         labelPadding: _labelPadding,

@@ -4,6 +4,7 @@ import 'package:help_yourself_app/common/res/strings.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotions_category.dart';
 import 'package:help_yourself_app/ui/screens/main/emotions/add/add_emotion_store.dart';
+import 'package:help_yourself_app/ui/widgets/animated_dialog.dart';
 import 'package:help_yourself_app/ui/widgets/app_text_field.dart';
 import 'package:help_yourself_app/ui/widgets/emotion_chip.dart';
 
@@ -16,7 +17,9 @@ class ChooseEmotionPage extends StatelessWidget {
   final void Function(EmotionsCategory category) onCategorySelected;
   final void Function(String text) onSearch;
 
-  const ChooseEmotionPage({
+  OverlayEntry? _dialog;
+
+  ChooseEmotionPage({
     Key? key,
     required this.state,
     required this.selectedEmotions,
@@ -36,7 +39,7 @@ class ChooseEmotionPage extends StatelessWidget {
           Dimens.padding16.spacer(),
           _filters(context),
           Dimens.padding16.spacer(),
-          _emotions,
+          _emotions(context),
         ],
       );
 
@@ -61,13 +64,13 @@ class ChooseEmotionPage extends StatelessWidget {
             .toList(),
       );
 
-  Widget get _emotions => state == ChooseEmotionState.search
+  Widget _emotions(BuildContext context) => state == ChooseEmotionState.search
       ? foundEmotions.isNotEmpty
-          ? _chipList(foundEmotions)
+          ? _chipList(context, foundEmotions)
           : Text(Strings.addEmotion.nothingFound())
-      : _chipList(selectedCategory.appropriateEmotions);
+      : _chipList(context, selectedCategory.appropriateEmotions);
 
-  Widget _chipList(List<Emotion> emotions) => Wrap(
+  Widget _chipList(BuildContext context, List<Emotion> emotions) => Wrap(
         spacing: _spacing,
         runSpacing: _spacing,
         children: emotions
@@ -77,8 +80,36 @@ class ChooseEmotionPage extends StatelessWidget {
                 toText: (e) => e.text,
                 onClick: onEmotionSelected,
                 selected: selectedEmotions.contains(e),
+                onLongPress: (e) {
+                  _dialog = _createPopupDialog(e);
+                  Overlay.of(context)?.insert(_dialog!);
+                },
+                onLongPressEnd: (e) => _dialog?.remove(),
               ),
             )
             .toList(),
+      );
+
+  OverlayEntry _createPopupDialog(Emotion emotion) => OverlayEntry(
+      builder: (context) => AnimatedDialog(
+        child: _dialogContent(context, emotion),
+      ),
+    );
+
+  Widget _dialogContent(BuildContext context, Emotion emotion) => Padding(
+        padding: const EdgeInsets.all(Dimens.padding8),
+        child: Container(
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(Dimens.borderRadius)),
+          padding: const EdgeInsets.all(Dimens.padding16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                emotion.description,
+                style: Theme.of(context).textTheme.bodyText1,
+              )
+            ],
+          ),
+        ),
       );
 }
