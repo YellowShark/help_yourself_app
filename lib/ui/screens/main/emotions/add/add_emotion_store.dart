@@ -1,3 +1,4 @@
+import 'package:help_yourself_app/common/res/strings.dart';
 import 'package:help_yourself_app/common/routes/router.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion_note.dart';
@@ -24,7 +25,7 @@ abstract class AddEmotionViewModel extends BaseViewModel {
 
   void onSearch(String query);
 
-  void onNextStep();
+  void onNextStep({required void Function(String text) onError});
 
   void onPrevStep();
 
@@ -34,7 +35,7 @@ abstract class AddEmotionViewModel extends BaseViewModel {
 
   void onDateChanged(DateTime date);
 
-  Future onSave();
+  Future onSave({required void Function(String text) onError});
 
   void onCategorySelected(EmotionsCategory category);
 }
@@ -99,7 +100,11 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
 
   @action
   @override
-  void onNextStep() {
+  void onNextStep({required void Function(String text) onError}) {
+    if (_selectedEmotions.isEmpty) {
+      onError(Strings.addEmotion.emptyEmotions());
+      return;
+    }
     _currentStep = _currentStep + 1;
     _emotionNote = _emotionNote.copyWith(emotions: selectedEmotions);
   }
@@ -126,7 +131,11 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
   }
 
   @override
-  Future onSave() async {
+  Future onSave({required void Function(String text) onError}) async {
+    if (_emotionNote.name.isEmpty) {
+      onError(Strings.addEmotion.emptyTitle());
+      return;
+    }
     await _interactor.addNote(_emotionNote);
     dispose();
     _appRouter.pop();

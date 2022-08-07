@@ -103,6 +103,8 @@ class AddEmotionStrings {
   String save() => Intl.message('Сохранить');
   String name() => Intl.message('Событие');
   String comment() => Intl.message('Детали, переживания...');
+  String emptyEmotions() => Intl.message('Выберите хотя бы одну эмоцию.');
+  String emptyTitle() => Intl.message('Пожалуйста, введите заголовок.');
 }
 
 class HomeScreenStrings {

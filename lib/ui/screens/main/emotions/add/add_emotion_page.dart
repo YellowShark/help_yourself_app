@@ -24,7 +24,9 @@ class AddEmotionPage extends BasePage<AddEmotionViewModel> {
             selectedEmotions: viewModel.selectedEmotions,
             foundEmotions: viewModel.foundEmotions,
             onEmotionSelected: viewModel.onEmotionSelected,
-            onSearch: viewModel.onSearch, selectedCategory: viewModel.selectedCategory, onCategorySelected: viewModel.onCategorySelected,
+            onSearch: viewModel.onSearch,
+            selectedCategory: viewModel.selectedCategory,
+            onCategorySelected: viewModel.onCategorySelected,
           ),
           Strings.addEmotion.details(): EmotionDetailsPage(
             onNameChanged: viewModel.onNameChanged,
@@ -38,24 +40,28 @@ class AddEmotionPage extends BasePage<AddEmotionViewModel> {
 
   @override
   Widget? bottomBar(BuildContext context) => Observer(
-        builder: (_) => viewModel.currentStep == 0 ? _nextButton : _prevOrSave,
+        builder: (_) => viewModel.currentStep == 0 ? _nextButton(context) : _prevOrSave(context),
       );
 
-  Widget get _nextButton => Padding(
+  Widget _nextButton(BuildContext context) => Padding(
         padding: const EdgeInsets.all(Dimens.padding16),
         child: ElevatedButton(
-          onPressed: viewModel.onNextStep,
+          onPressed: () => viewModel.onNextStep(onError: (error) {
+            _showErrorSnackbar(context, error);
+          }),
           child: Text(Strings.addEmotion.next()),
         ),
       );
 
-  Widget get _prevOrSave => Padding(
+  Widget _prevOrSave(BuildContext context) => Padding(
         padding: const EdgeInsets.all(Dimens.padding16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ElevatedButton(
-              onPressed: viewModel.onSave,
+              onPressed: () => viewModel.onSave(onError: (error) {
+                _showErrorSnackbar(context, error);
+              }),
               child: Text(Strings.addEmotion.save()),
             ),
             Dimens.padding16.spacer(),
@@ -66,4 +72,13 @@ class AddEmotionPage extends BasePage<AddEmotionViewModel> {
           ],
         ),
       );
+
+  void _showErrorSnackbar(BuildContext context, String error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(error),
+        backgroundColor: Colors.redAccent,
+      ),
+    );
+  }
 }

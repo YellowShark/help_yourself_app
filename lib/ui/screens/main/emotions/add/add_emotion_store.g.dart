@@ -133,11 +133,11 @@ mixin _$AddEmotionStore on _AddEmotionStore, Store {
   }
 
   @override
-  void onNextStep() {
+  void onNextStep({required void Function(String) onError}) {
     final _$actionInfo = _$_AddEmotionStoreActionController.startAction(
         name: '_AddEmotionStore.onNextStep');
     try {
-      return super.onNextStep();
+      return super.onNextStep(onError: onError);
     } finally {
       _$_AddEmotionStoreActionController.endAction(_$actionInfo);
     }
