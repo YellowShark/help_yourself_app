@@ -8,6 +8,7 @@ abstract class Strings {
     static final video = VideoScreenStrings();
     static final emotions = EmotionsString();
     static final emotionDescriptions = EmotionDescriptionsString();
+    static final videoRecommendations = VideoRecommendationsPageStrings();
 }
 
 class EmotionDescriptionsString {
@@ -118,3 +119,9 @@ class VideoScreenStrings {
   String videoChannel() => Intl.message('Автор');
 
 }
+
+class VideoRecommendationsPageStrings {
+  String title() => Intl.message('Рекомендации');
+
+}
+
