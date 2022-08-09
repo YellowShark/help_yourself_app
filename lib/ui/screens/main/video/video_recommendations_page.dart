@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:help_yourself_app/ui/base/base_page.dart';
 import 'package:help_yourself_app/ui/screens/main/video/video_recommendations_store.dart';
+import 'package:help_yourself_app/ui/screens/main/video/videos_for_video_recommendations.dart';
 
 import '../../../../common/res/strings.dart';
 import 'package:help_yourself_app/ui/widgets/colored_button.dart';
@@ -22,7 +23,11 @@ class VideoRecommendationsPage extends BasePage<VideoRecommendationsViewModel> {
       ),
       itemBuilder: (BuildContext context, int index) {
         return ColoredButton(
-            onPressed: () {},
+            //onPressed: () {Navigator.pushNamed(context, 'route', arguments: index);},
+          onPressed: (){Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => VideosForVideoRecommendations(index: index)),
+          );},
             child: Text(
               forVideoRecommendationsPage[index].mood,
               textAlign: TextAlign.center,
@@ -39,11 +44,11 @@ class VideoRecommendationsPage extends BasePage<VideoRecommendationsViewModel> {
 
 class ForVideoRecommendationsPage {
   ForVideoRecommendationsPage(
-      {required this.mood, required this.color, required this.route});
+      {required this.mood, required this.color, required this.videoID});
 
   final String mood;
   final Color color;
-  final String route;
+  final String videoID;
 
 // void goToPage() {}
 
@@ -53,57 +58,57 @@ List forVideoRecommendationsPage = [
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.depression(),
       color: Colors.blueAccent,
-      route: ''),
+      videoID: 'opFb4ei918k'),
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.anxietyDisorder(),
       color: Colors.deepPurpleAccent,
-      route: ''),
+      videoID: 'Y2cqq3VK8eA'),
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.communication(),
       color: Colors.amber,
-      route: ''),
+      videoID: '8SopVLm2zW4'),
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.emotionManagement(),
       color: Colors.teal,
-      route: ''),
+      videoID: 'hgGI-75FMCA'),
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.insult(),
       color: Colors.pinkAccent,
-      route: ''),
+      videoID: 'TqufZpFxIBs'),
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.neurosis(),
       color: Colors.redAccent,
-      route: ''),
+      videoID: 'okgPs7p-I44'),
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.nutrition(),
       color: Colors.purple,
-      route: ''),
+      videoID: 'mstGWq3QcZw'),
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.relations(),
       color: Colors.green,
-      route: ''),
+      videoID: 'zaaZVQoWlSs'),
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.stressTolerance(),
       color: Colors.blueAccent,
-      route: ''),
+      videoID: 'LjjWiCVCoJs'),
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.upbringing(),
       color: Colors.deepPurpleAccent,
-      route: ''),
+      videoID: '5SdnWSZuVJM'),
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.lecturesPsychoanalysis(),
       color: Colors.amber,
-      route: ''),
+      videoID: 'RNeeBHcOPIU'),
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.personalityDisorders(),
       color: Colors.teal,
-      route: ''),
+      videoID: 'pzNqzCzdvMs'),
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.borderlinePersonalityDisorder(),
       color: Colors.pinkAccent,
-      route: ''),
+      videoID: '5Yz-Bvm5tRg'),
   ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.everydayLife(),
       color: Colors.redAccent,
-      route: '')
+      videoID: 'GE-I-abl4Ss')
 ];
