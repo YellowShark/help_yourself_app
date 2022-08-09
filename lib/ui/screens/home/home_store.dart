@@ -20,6 +20,10 @@ abstract class _HomeStore with Store implements HomeViewModel {
 
   @override
   Future logout() => _interactor.signOut();
+
+  @override
+  Future dispose() async {
+  }
 }
 
 abstract class HomeViewModel extends BaseViewModel {

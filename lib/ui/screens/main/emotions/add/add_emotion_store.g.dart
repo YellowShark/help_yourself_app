@@ -9,20 +9,37 @@ part of 'add_emotion_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AddEmotionStore on _AddEmotionStore, Store {
-  final _$_emotionsAtom = Atom(name: '_AddEmotionStore._emotions');
+  final _$_stateAtom = Atom(name: '_AddEmotionStore._state');
 
-  List<Emotion> get emotions {
-    _$_emotionsAtom.reportRead();
-    return super._emotions;
+  ChooseEmotionState get state {
+    _$_stateAtom.reportRead();
+    return super._state;
   }
 
   @override
-  List<Emotion> get _emotions => emotions;
+  ChooseEmotionState get _state => state;
 
   @override
-  set _emotions(List<Emotion> value) {
-    _$_emotionsAtom.reportWrite(value, super._emotions, () {
-      super._emotions = value;
+  set _state(ChooseEmotionState value) {
+    _$_stateAtom.reportWrite(value, super._state, () {
+      super._state = value;
+    });
+  }
+
+  final _$_foundEmotionsAtom = Atom(name: '_AddEmotionStore._foundEmotions');
+
+  List<Emotion> get foundEmotions {
+    _$_foundEmotionsAtom.reportRead();
+    return super._foundEmotions;
+  }
+
+  @override
+  List<Emotion> get _foundEmotions => foundEmotions;
+
+  @override
+  set _foundEmotions(List<Emotion> value) {
+    _$_foundEmotionsAtom.reportWrite(value, super._foundEmotions, () {
+      super._foundEmotions = value;
     });
   }
 
@@ -41,6 +58,24 @@ mixin _$AddEmotionStore on _AddEmotionStore, Store {
   set _selectedEmotions(List<Emotion> value) {
     _$_selectedEmotionsAtom.reportWrite(value, super._selectedEmotions, () {
       super._selectedEmotions = value;
+    });
+  }
+
+  final _$_selectedCategoryAtom =
+      Atom(name: '_AddEmotionStore._selectedCategory');
+
+  EmotionsCategory get selectedCategory {
+    _$_selectedCategoryAtom.reportRead();
+    return super._selectedCategory;
+  }
+
+  @override
+  EmotionsCategory get _selectedCategory => selectedCategory;
+
+  @override
+  set _selectedCategory(EmotionsCategory value) {
+    _$_selectedCategoryAtom.reportWrite(value, super._selectedCategory, () {
+      super._selectedCategory = value;
     });
   }
 
@@ -87,11 +122,22 @@ mixin _$AddEmotionStore on _AddEmotionStore, Store {
   }
 
   @override
-  void onNextStep() {
+  void onCategorySelected(EmotionsCategory category) {
+    final _$actionInfo = _$_AddEmotionStoreActionController.startAction(
+        name: '_AddEmotionStore.onCategorySelected');
+    try {
+      return super.onCategorySelected(category);
+    } finally {
+      _$_AddEmotionStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void onNextStep({required void Function(String) onError}) {
     final _$actionInfo = _$_AddEmotionStoreActionController.startAction(
         name: '_AddEmotionStore.onNextStep');
     try {
-      return super.onNextStep();
+      return super.onNextStep(onError: onError);
     } finally {
       _$_AddEmotionStoreActionController.endAction(_$actionInfo);
     }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppTextField extends StatelessWidget {
+  final TextEditingController? controller;
   final String hint;
   final IconData? prefixIcon;
   final int? maxLines;
@@ -8,6 +9,7 @@ class AppTextField extends StatelessWidget {
 
   const AppTextField({
     Key? key,
+    this.controller,
     this.hint = '',
     this.prefixIcon,
     this.onChanged,
@@ -17,6 +19,7 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       decoration: InputDecoration(
         prefixIcon: prefixIcon == null ? null : Icon(prefixIcon),
         border: const OutlineInputBorder(),

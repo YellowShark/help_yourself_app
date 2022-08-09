@@ -35,4 +35,7 @@ abstract class _MainStore with Store implements MainViewModel {
     _currentPage = _screens[index];
     _currentPageIndex = index;
   }
+
+  @override
+  Future dispose() async {}
 }
