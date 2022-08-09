@@ -13,7 +13,7 @@ part 'add_emotion_store.g.dart';
 abstract class AddEmotionViewModel extends BaseViewModel {
   ChooseEmotionState get state;
 
-  List<Emotion> get selectedEmotions;
+  EmotionNote get emotionNote;
 
   List<Emotion> get foundEmotions;
 
@@ -40,27 +40,35 @@ abstract class AddEmotionViewModel extends BaseViewModel {
   void onCategorySelected(EmotionsCategory category);
 }
 
-@LazySingleton(as: AddEmotionViewModel)
-class AddEmotionStore = _AddEmotionStore with _$AddEmotionStore;
+@Injectable(as: AddEmotionViewModel)
+class AddEmotionStore extends _AddEmotionStore with _$AddEmotionStore {
+  AddEmotionStore(
+    AppRouter appRouter,
+    EmotionNotesInteractor interactor,
+    @factoryParam EmotionNote? note,
+  ) : super(appRouter, interactor, note);
+}
 
 abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
   final AppRouter _appRouter;
   final EmotionNotesInteractor _interactor;
-  EmotionNote _emotionNote = EmotionNote.empty();
 
   _AddEmotionStore(
     this._appRouter,
     this._interactor,
-  );
+    EmotionNote? note,
+  ) {
+    updateDataIfEditMode(note);
+  }
+
+  @readonly
+  EmotionNote _emotionNote = EmotionNote.empty();
 
   @readonly
   ChooseEmotionState _state = ChooseEmotionState.initial;
 
   @readonly
   List<Emotion> _foundEmotions = [];
-
-  @readonly
-  List<Emotion> _selectedEmotions = [];
 
   @readonly
   EmotionsCategory _selectedCategory = EmotionsCategory.positive;
@@ -71,10 +79,10 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
   @action
   @override
   void onEmotionSelected(Emotion emotion) {
-    if (!_selectedEmotions.contains(emotion)) {
-      _selectedEmotions = _selectedEmotions..add(emotion);
+    if (!_emotionNote.emotions.contains(emotion)) {
+      _emotionNote = _emotionNote.copyWith(emotions: _emotionNote.emotions..add(emotion));
     } else {
-      _selectedEmotions = _selectedEmotions..remove(emotion);
+      _emotionNote = _emotionNote.copyWith(emotions: _emotionNote.emotions..remove(emotion));
     }
   }
 
@@ -101,12 +109,11 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
   @action
   @override
   void onNextStep({required void Function(String text) onError}) {
-    if (_selectedEmotions.isEmpty) {
+    if (_emotionNote.emotions.isEmpty) {
       onError(Strings.addEmotion.emptyEmotions());
       return;
     }
     _currentStep = _currentStep + 1;
-    _emotionNote = _emotionNote.copyWith(emotions: selectedEmotions);
   }
 
   @action
@@ -127,8 +134,6 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
 
   @override
   void onDateChanged(DateTime date) {
-    print(date.toString());
-    print(date.millisecondsSinceEpoch.toString());
     _emotionNote = _emotionNote.copyWith(date: date.millisecondsSinceEpoch);
   }
 
@@ -138,6 +143,7 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
       onError(Strings.addEmotion.emptyTitle());
       return;
     }
+    // TODO update if edit mode
     await _interactor.addNote(_emotionNote);
     dispose();
     _appRouter.pop();
@@ -147,11 +153,18 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
   Future dispose() async {
     _emotionNote = EmotionNote.empty();
     _currentStep = 0;
-    _selectedEmotions = [];
     _state = ChooseEmotionState.initial;
     _foundEmotions = [];
     _selectedCategory = EmotionsCategory.positive;
   }
+
+  void updateDataIfEditMode(EmotionNote? note) {
+    if (note == null) return;
+    _emotionNote = note;
+  }
 }
 
-enum ChooseEmotionState { initial, search, }
+enum ChooseEmotionState {
+  initial,
+  search,
+}

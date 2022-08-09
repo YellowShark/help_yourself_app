@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:help_yourself_app/common/res/dimens.dart';
 import 'package:help_yourself_app/common/res/strings.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
+import 'package:help_yourself_app/domain/entities/emotion/emotion_note.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotions_category.dart';
 import 'package:help_yourself_app/ui/screens/main/emotions/add/add_emotion_store.dart';
 import 'package:help_yourself_app/ui/widgets/animated_dialog.dart';
@@ -10,7 +11,7 @@ import 'package:help_yourself_app/ui/widgets/emotion_chip.dart';
 
 class ChooseEmotionPage extends StatelessWidget {
   final ChooseEmotionState state;
-  final List<Emotion> selectedEmotions;
+  final EmotionNote currentNote;
   final List<Emotion> foundEmotions;
   final EmotionsCategory selectedCategory;
   final void Function(Emotion emotion) onEmotionSelected;
@@ -22,7 +23,7 @@ class ChooseEmotionPage extends StatelessWidget {
   ChooseEmotionPage({
     Key? key,
     required this.state,
-    required this.selectedEmotions,
+    required this.currentNote,
     required this.foundEmotions,
     required this.selectedCategory,
     required this.onEmotionSelected,
@@ -79,7 +80,7 @@ class ChooseEmotionPage extends StatelessWidget {
                 value: e,
                 toText: (e) => e.text,
                 onClick: onEmotionSelected,
-                selected: selectedEmotions.contains(e),
+                selected: currentNote.emotions.contains(e),
                 onLongPress: (e) {
                   _dialog = _createPopupDialog(e);
                   Overlay.of(context)?.insert(_dialog!);

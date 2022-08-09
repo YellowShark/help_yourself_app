@@ -7,43 +7,48 @@ import 'package:help_yourself_app/ui/widgets/emotion_chip.dart';
 
 class EmotionNoteCard extends StatelessWidget {
   final EmotionNote note;
+  final void Function(EmotionNote note) onClick;
 
   const EmotionNoteCard({
     Key? key,
     required this.note,
+    required this.onClick,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print(note.date);
     return Card(
       margin: const EdgeInsets.all(Dimens.padding8),
-      child: Padding(
-        padding: const EdgeInsets.all(Dimens.padding16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              note.name,
-              style: Theme.of(context).textTheme.headline5,
-              overflow: TextOverflow.ellipsis,
-            ),
-            Dimens.padding8.spacer(),
-            Text(
-              note.date.toFormattedDate(),
-              style: Theme.of(context).textTheme.caption,
-            ),
-            if (note.comment.trim().isNotEmpty) ...[
-              Dimens.padding8.spacer(),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(Dimens.borderRadius),
+        onTap: () => onClick(note),
+        child: Padding(
+          padding: const EdgeInsets.all(Dimens.padding16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
-                note.comment,
-                style: Theme.of(context).textTheme.subtitle1,
+                note.name,
+                style: Theme.of(context).textTheme.headline5,
                 overflow: TextOverflow.ellipsis,
               ),
+              Dimens.padding8.spacer(),
+              Text(
+                note.date.toFormattedDate(),
+                style: Theme.of(context).textTheme.caption,
+              ),
+              if (note.comment.trim().isNotEmpty) ...[
+                Dimens.padding8.spacer(),
+                Text(
+                  note.comment,
+                  style: Theme.of(context).textTheme.subtitle1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+              Dimens.padding8.spacer(),
+              _chips,
             ],
-            Dimens.padding8.spacer(),
-            _chips,
-          ],
+          ),
         ),
       ),
     );

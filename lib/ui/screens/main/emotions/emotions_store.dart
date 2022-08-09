@@ -13,6 +13,7 @@ abstract class EmotionsViewModel extends BaseViewModel {
   List<EmotionNote> get notes;
   void onCreateClick();
   Future updateNotes();
+  void onEditClick(EmotionNote note);
 }
 
 @Injectable(as: EmotionsViewModel)
@@ -35,6 +36,11 @@ abstract class _EmotionsStore with Store implements EmotionsViewModel {
   @override
   void onCreateClick() {
     _appRouter.push(AddEmotionRoute());
+  }
+
+  @override
+  void onEditClick(EmotionNote note) {
+    _appRouter.push(AddEmotionRoute(note: note));
   }
 
   @action

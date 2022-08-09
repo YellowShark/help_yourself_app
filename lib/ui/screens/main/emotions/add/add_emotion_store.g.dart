@@ -9,6 +9,23 @@ part of 'add_emotion_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AddEmotionStore on _AddEmotionStore, Store {
+  final _$_emotionNoteAtom = Atom(name: '_AddEmotionStore._emotionNote');
+
+  EmotionNote get emotionNote {
+    _$_emotionNoteAtom.reportRead();
+    return super._emotionNote;
+  }
+
+  @override
+  EmotionNote get _emotionNote => emotionNote;
+
+  @override
+  set _emotionNote(EmotionNote value) {
+    _$_emotionNoteAtom.reportWrite(value, super._emotionNote, () {
+      super._emotionNote = value;
+    });
+  }
+
   final _$_stateAtom = Atom(name: '_AddEmotionStore._state');
 
   ChooseEmotionState get state {
@@ -40,24 +57,6 @@ mixin _$AddEmotionStore on _AddEmotionStore, Store {
   set _foundEmotions(List<Emotion> value) {
     _$_foundEmotionsAtom.reportWrite(value, super._foundEmotions, () {
       super._foundEmotions = value;
-    });
-  }
-
-  final _$_selectedEmotionsAtom =
-      Atom(name: '_AddEmotionStore._selectedEmotions');
-
-  List<Emotion> get selectedEmotions {
-    _$_selectedEmotionsAtom.reportRead();
-    return super._selectedEmotions;
-  }
-
-  @override
-  List<Emotion> get _selectedEmotions => selectedEmotions;
-
-  @override
-  set _selectedEmotions(List<Emotion> value) {
-    _$_selectedEmotionsAtom.reportWrite(value, super._selectedEmotions, () {
-      super._selectedEmotions = value;
     });
   }
 

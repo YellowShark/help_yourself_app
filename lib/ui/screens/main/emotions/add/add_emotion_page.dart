@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:help_yourself_app/common/res/dimens.dart';
 import 'package:help_yourself_app/common/res/strings.dart';
+import 'package:help_yourself_app/di/config/injection.dart';
+import 'package:help_yourself_app/domain/entities/emotion/emotion_note.dart';
 import 'package:help_yourself_app/ui/base/base_page.dart';
 import 'package:help_yourself_app/ui/screens/main/emotions/add/add_emotion_store.dart';
 import 'package:help_yourself_app/ui/screens/main/emotions/add/steps/choose_emotion_page.dart';
@@ -9,7 +11,13 @@ import 'package:help_yourself_app/ui/screens/main/emotions/add/steps/emotion_det
 import 'package:help_yourself_app/ui/widgets/app_wizard.dart';
 
 class AddEmotionPage extends BasePage<AddEmotionViewModel> {
-  AddEmotionPage({Key? key}) : super(key: key);
+  AddEmotionPage({
+    Key? key,
+    EmotionNote? note,
+  }) : super(
+          key: key,
+          customViewModel: getIt<AddEmotionViewModel>(param1: note),
+        );
 
   @override
   Widget content(BuildContext context) {
@@ -21,7 +29,7 @@ class AddEmotionPage extends BasePage<AddEmotionViewModel> {
         steps: {
           Strings.addEmotion.chooseEmotion(): ChooseEmotionPage(
             state: viewModel.state,
-            selectedEmotions: viewModel.selectedEmotions,
+            currentNote: viewModel.emotionNote,
             foundEmotions: viewModel.foundEmotions,
             onEmotionSelected: viewModel.onEmotionSelected,
             onSearch: viewModel.onSearch,
@@ -29,6 +37,7 @@ class AddEmotionPage extends BasePage<AddEmotionViewModel> {
             onCategorySelected: viewModel.onCategorySelected,
           ),
           Strings.addEmotion.details(): EmotionDetailsPage(
+            currentNote: viewModel.emotionNote,
             onNameChanged: viewModel.onNameChanged,
             onCommentChanged: viewModel.onCommentChanged,
             onDateChanged: viewModel.onDateChanged,

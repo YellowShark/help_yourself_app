@@ -4,10 +4,10 @@ import 'package:help_yourself_app/ui/base/base_view_model.dart';
 
 abstract class BasePage<VM extends BaseViewModel> extends StatefulWidget {
   @protected
-  final viewModel = getIt<VM>();
+  late final VM viewModel = customViewModel ?? getIt<VM>();
+  final VM? customViewModel;
 
-  BasePage({Key? key}) : super(key: key);
-
+  BasePage({Key? key, this.customViewModel}) : super(key: key);
 
   void onCreate() => {};
 

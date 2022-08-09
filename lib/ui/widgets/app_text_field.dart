@@ -5,6 +5,7 @@ class AppTextField extends StatelessWidget {
   final String hint;
   final IconData? prefixIcon;
   final int? maxLines;
+  final String initialValue;
   final void Function(String text)? onChanged;
 
   const AppTextField({
@@ -13,13 +14,14 @@ class AppTextField extends StatelessWidget {
     this.hint = '',
     this.prefixIcon,
     this.onChanged,
+    this.initialValue = '',
     this.maxLines,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: controller,
+      controller: controller ?? TextEditingController(text: initialValue),
       decoration: InputDecoration(
         prefixIcon: prefixIcon == null ? null : Icon(prefixIcon),
         border: const OutlineInputBorder(),
