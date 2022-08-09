@@ -3,7 +3,7 @@ import 'package:help_yourself_app/ui/base/base_page.dart';
 import 'package:help_yourself_app/ui/screens/main/video/video_recommendations_store.dart';
 
 import '../../../../common/res/strings.dart';
-import 'package:help_yourself_app/ui/screens/main/video/colored_button.dart';
+import 'package:help_yourself_app/ui/widgets/colored_button.dart';
 
 class VideoRecommendationsPage extends BasePage<VideoRecommendationsViewModel> {
   VideoRecommendationsPage({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class VideoRecommendationsPage extends BasePage<VideoRecommendationsViewModel> {
   @override
   Widget content(BuildContext context) {
     return GridView.builder(
-      itemCount: 12,
+      itemCount: 14,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 2,
@@ -51,35 +51,59 @@ class ForVideoRecommendationsPage {
 
 List forVideoRecommendationsPage = [
   ForVideoRecommendationsPage(
-      mood: Strings.emotions.anxiety(), color: Colors.blueAccent, route: ''),
+      mood: Strings.videoRecommendations.depression(),
+      color: Colors.blueAccent,
+      route: ''),
   ForVideoRecommendationsPage(
-      mood: Strings.emotions.cheerfulness(),
+      mood: Strings.videoRecommendations.anxietyDisorder(),
       color: Colors.deepPurpleAccent,
       route: ''),
   ForVideoRecommendationsPage(
-      mood: Strings.emotions.anger(), color: Colors.amber, route: ''),
+      mood: Strings.videoRecommendations.communication(),
+      color: Colors.amber,
+      route: ''),
   ForVideoRecommendationsPage(
-      mood: Strings.emotions.comfort(), color: Colors.teal, route: ''),
+      mood: Strings.videoRecommendations.emotionManagement(),
+      color: Colors.teal,
+      route: ''),
   ForVideoRecommendationsPage(
-      mood: Strings.emotions.disappointment(),
+      mood: Strings.videoRecommendations.insult(),
       color: Colors.pinkAccent,
       route: ''),
   ForVideoRecommendationsPage(
-      mood: Strings.emotions.embarrassment(),
+      mood: Strings.videoRecommendations.neurosis(),
       color: Colors.redAccent,
       route: ''),
   ForVideoRecommendationsPage(
-      mood: Strings.emotions.helplessness(), color: Colors.brown, route: ''),
+      mood: Strings.videoRecommendations.nutrition(),
+      color: Colors.purple,
+      route: ''),
   ForVideoRecommendationsPage(
-      mood: Strings.emotions.energy(), color: Colors.green, route: ''),
+      mood: Strings.videoRecommendations.relations(),
+      color: Colors.green,
+      route: ''),
   ForVideoRecommendationsPage(
-      mood: Strings.emotions.hope(), color: Colors.blueAccent, route: ''),
+      mood: Strings.videoRecommendations.stressTolerance(),
+      color: Colors.blueAccent,
+      route: ''),
   ForVideoRecommendationsPage(
-      mood: Strings.emotions.interest(),
+      mood: Strings.videoRecommendations.upbringing(),
       color: Colors.deepPurpleAccent,
       route: ''),
   ForVideoRecommendationsPage(
-      mood: Strings.emotions.loneliness(), color: Colors.amber, route: ''),
+      mood: Strings.videoRecommendations.lecturesPsychoanalysis(),
+      color: Colors.amber,
+      route: ''),
   ForVideoRecommendationsPage(
-      mood: Strings.emotions.shock(), color: Colors.teal, route: '')
+      mood: Strings.videoRecommendations.personalityDisorders(),
+      color: Colors.teal,
+      route: ''),
+  ForVideoRecommendationsPage(
+      mood: Strings.videoRecommendations.borderlinePersonalityDisorder(),
+      color: Colors.pinkAccent,
+      route: ''),
+  ForVideoRecommendationsPage(
+      mood: Strings.videoRecommendations.everydayLife(),
+      color: Colors.redAccent,
+      route: '')
 ];

@@ -122,6 +122,19 @@ class VideoScreenStrings {
 
 class VideoRecommendationsPageStrings {
   String title() => Intl.message('Рекомендации');
-
+  String depression() => Intl.message('Депрессия');
+  String anxietyDisorder() => Intl.message('Тревожное\nрасстройство');
+  String personalityDisorders() => Intl.message('Расстройства\nличности');
+  String nutrition() => Intl.message('Питание');
+  String upbringing() => Intl.message('Воспитание\nдетей');
+  String insult() => Intl.message('Обиды');
+  String neurosis() => Intl.message('Неврозы');
+  String communication() => Intl.message('Коммуникация');
+  String relations() => Intl.message('Отношения');
+  String stressTolerance() => Intl.message('Стрессо\nустойчивость');
+  String emotionManagement() => Intl.message('Управление\nэмоциями');
+  String borderlinePersonalityDisorder() => Intl.message('Пограничное\nрасстройство');
+  String lecturesPsychoanalysis() => Intl.message('Лекции по\nпсихоанализу');
+  String everydayLife() => Intl.message('Будни\nпсихиаторов');
 }
 
