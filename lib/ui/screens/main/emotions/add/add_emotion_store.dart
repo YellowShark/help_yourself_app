@@ -127,6 +127,8 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
 
   @override
   void onDateChanged(DateTime date) {
+    print(date.toString());
+    print(date.millisecondsSinceEpoch.toString());
     _emotionNote = _emotionNote.copyWith(date: date.millisecondsSinceEpoch);
   }
 
