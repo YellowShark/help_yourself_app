@@ -12,4 +12,8 @@ class VideoRecommendationsStore = _VideoRecommendationsStore with _$VideoRecomme
 
 abstract class _VideoRecommendationsStore with Store implements VideoRecommendationsViewModel {
 
+  @override
+  Future dispose() async {
+
+  }
 }
