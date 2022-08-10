@@ -17,6 +17,9 @@ class EmotionsPageList extends BasePage<EmotionsViewModel> {
   @override
   AppBar? appBar(BuildContext context) => AppBar(
         title: Text(Strings.main.diary()),
+        actions: [
+          IconButton(onPressed: viewModel.onShare, icon: const Icon(Icons.share)),
+        ],
       );
 
   @override

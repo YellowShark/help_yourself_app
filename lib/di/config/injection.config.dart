@@ -4,35 +4,39 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-import 'package:firebase_auth/firebase_auth.dart' as _i6;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i7;
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:firebase_auth/firebase_auth.dart' as _i8;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i9;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import '../../common/routes/router.dart' as _i3;
-import '../../data/interactors/auth/firebase_auth_interactor.dart' as _i20;
+import '../../data/interactors/auth/firebase_auth_interactor.dart' as _i22;
 import '../../data/interactors/emotion_notes/default_emotion_notes_interactor.dart'
-    as _i15;
+    as _i17;
 import '../../data/repositories/emotion_notes/object_box_emotion_notes_repository.dart'
     as _i5;
-import '../../data/services/auth/firebase_auth_service.dart' as _i13;
-import '../../data/services/auth_manager/secure_auth_manager.dart' as _i11;
-import '../../domain/entities/emotion/emotion_note.dart' as _i18;
-import '../../domain/interactors/auth/auth_interactor.dart' as _i19;
+import '../../data/services/auth/firebase_auth_service.dart' as _i15;
+import '../../data/services/auth_manager/secure_auth_manager.dart' as _i13;
+import '../../data/services/excel_converter/default_excel_converter.dart'
+    as _i7;
+import '../../domain/entities/emotion/emotion_note.dart' as _i20;
+import '../../domain/interactors/auth/auth_interactor.dart' as _i21;
 import '../../domain/interactors/emotion_notes/emotion_notes_interactor.dart'
-    as _i14;
+    as _i16;
 import '../../domain/repositories/emotion_notes/emotion_notes_repository.dart'
     as _i4;
-import '../../domain/services/auth/auth_service.dart' as _i12;
-import '../../domain/services/auth_manager/auth_manager.dart' as _i10;
-import '../../objectbox.g.dart' as _i9;
-import '../../ui/screens/home/home_store.dart' as _i21;
-import '../../ui/screens/main/emotions/add/add_emotion_store.dart' as _i17;
-import '../../ui/screens/main/emotions/emotions_store.dart' as _i16;
-import '../../ui/screens/main/main_store.dart' as _i8;
-import '../modules/firebase_module.dart' as _i22;
+import '../../domain/services/auth/auth_service.dart' as _i14;
+import '../../domain/services/auth_manager/auth_manager.dart' as _i12;
+import '../../domain/services/excel_converter/excel_converter.dart' as _i6;
+import '../../objectbox.g.dart' as _i11;
+import '../../ui/screens/home/home_store.dart' as _i23;
+import '../../ui/screens/main/emotions/add/add_emotion_store.dart' as _i19;
+import '../../ui/screens/main/emotions/emotions_store.dart' as _i18;
+import '../../ui/screens/main/main_store.dart' as _i10;
+import '../modules/firebase_module.dart' as _i24;
 import '../modules/local_module.dart'
-    as _i23; // ignore_for_file: unnecessary_lambdas
+    as _i25; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -44,32 +48,34 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.singleton<_i3.AppRouter>(_i3.AppRouter());
   gh.lazySingleton<_i4.EmotionNotesRepository>(
       () => _i5.ObjectBoxEmotionNotesRepository());
-  await gh.singletonAsync<_i6.FirebaseAuth>(
+  gh.factory<_i6.ExcelConverter>(() => _i7.DefaultExcelConverter());
+  await gh.singletonAsync<_i8.FirebaseAuth>(
       () => firebaseModule.getFirebaseAuth(),
       preResolve: true);
-  gh.lazySingleton<_i7.FlutterSecureStorage>(() => localModule.secureStorage);
-  gh.lazySingleton<_i8.MainViewModel>(
-      () => _i8.MainStore(get<_i3.AppRouter>()));
-  await gh.singletonAsync<_i9.Store>(() => localModule.objectBoxStore,
+  gh.lazySingleton<_i9.FlutterSecureStorage>(() => localModule.secureStorage);
+  gh.lazySingleton<_i10.MainViewModel>(
+      () => _i10.MainStore(get<_i3.AppRouter>()));
+  await gh.singletonAsync<_i11.Store>(() => localModule.objectBoxStore,
       preResolve: true);
-  gh.lazySingleton<_i10.AuthManager>(
-      () => _i11.SecureAuthManager(get<_i7.FlutterSecureStorage>()));
-  gh.lazySingleton<_i12.AuthService>(
-      () => _i13.FirebaseAuthService(get<_i6.FirebaseAuth>()));
-  gh.factory<_i14.EmotionNotesInteractor>(() =>
-      _i15.DefaultEmotionNotesInteractor(get<_i4.EmotionNotesRepository>()));
-  gh.factory<_i16.EmotionsViewModel>(() => _i16.EmotionsStore(
-      get<_i3.AppRouter>(), get<_i14.EmotionNotesInteractor>()));
-  gh.factoryParam<_i17.AddEmotionViewModel, _i18.EmotionNote?, dynamic>(
-      (note, _) => _i17.AddEmotionStore(
-          get<_i3.AppRouter>(), get<_i14.EmotionNotesInteractor>(), note));
-  gh.factory<_i19.AuthInteractor>(() => _i20.FirebaseAuthInteractor(
-      get<_i12.AuthService>(), get<_i10.AuthManager>()));
-  gh.factory<_i21.HomeViewModel>(
-      () => _i21.HomeStore(get<_i19.AuthInteractor>(), get<_i3.AppRouter>()));
+  gh.lazySingleton<_i12.AuthManager>(
+      () => _i13.SecureAuthManager(get<_i9.FlutterSecureStorage>()));
+  gh.lazySingleton<_i14.AuthService>(
+      () => _i15.FirebaseAuthService(get<_i8.FirebaseAuth>()));
+  gh.factory<_i16.EmotionNotesInteractor>(() =>
+      _i17.DefaultEmotionNotesInteractor(
+          get<_i4.EmotionNotesRepository>(), get<_i6.ExcelConverter>()));
+  gh.factory<_i18.EmotionsViewModel>(() => _i18.EmotionsStore(
+      get<_i3.AppRouter>(), get<_i16.EmotionNotesInteractor>()));
+  gh.factoryParam<_i19.AddEmotionViewModel, _i20.EmotionNote?, dynamic>(
+      (note, _) => _i19.AddEmotionStore(
+          get<_i3.AppRouter>(), get<_i16.EmotionNotesInteractor>(), note));
+  gh.factory<_i21.AuthInteractor>(() => _i22.FirebaseAuthInteractor(
+      get<_i14.AuthService>(), get<_i12.AuthManager>()));
+  gh.factory<_i23.HomeViewModel>(
+      () => _i23.HomeStore(get<_i21.AuthInteractor>(), get<_i3.AppRouter>()));
   return get;
 }
 
-class _$FirebaseModule extends _i22.FirebaseModule {}
+class _$FirebaseModule extends _i24.FirebaseModule {}
 
-class _$LocalModule extends _i23.LocalModule {}
+class _$LocalModule extends _i25.LocalModule {}
