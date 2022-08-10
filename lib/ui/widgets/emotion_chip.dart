@@ -8,16 +8,16 @@ class AppChip<T> extends StatelessWidget {
   final void Function(T value)? onLongPress;
   final void Function(T value)? onLongPressEnd;
   final String Function(T value) toText;
-  final Color primaryColor;
-  final Color secondaryColor;
+  final Color? primaryColor;
+  final Color? secondaryColor;
 
   const AppChip({
     Key? key,
     required this.value,
     required this.toText,
     this.selected = false,
-    this.primaryColor = const Color(0xFFff6666),
-    this.secondaryColor = Colors.white,
+    this.primaryColor,
+    this.secondaryColor,
     this.onClick,
     this.onLongPress,
     this.onLongPressEnd,
@@ -44,7 +44,7 @@ class AppChip<T> extends StatelessWidget {
           style: Theme.of(context).textTheme.subtitle2?.copyWith(color: selected ? Colors.white : Colors.black),
         ),
         backgroundColor: selected ? primaryColor : secondaryColor,
-        side: BorderSide(color: primaryColor),
+        side: BorderSide(color: primaryColor ?? const Color(0xFFff6666)),
         elevation: Dimens.smallElevation,
         shadowColor: _shadowColor,
       ),

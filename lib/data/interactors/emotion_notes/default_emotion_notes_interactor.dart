@@ -13,5 +13,8 @@ class DefaultEmotionNotesInteractor extends EmotionNotesInteractor {
   Future addNote(EmotionNote note) => _repository.addNote(note);
 
   @override
+  Future updateNote(EmotionNote note) => _repository.updateNote(note);
+
+  @override
   Stream<List<EmotionNote>> getAllNotes() => _repository.getAllNotes();
 }

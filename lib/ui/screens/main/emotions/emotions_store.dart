@@ -54,7 +54,7 @@ abstract class _EmotionsStore with Store implements EmotionsViewModel {
 
   Future _initNotes() async {
     _interactor.getAllNotes().listen((notes) {
-      _notes = notes;
+      _notes = notes..sort((e1, e2) => e1.date.compareTo(e2.date))..reversed;
     });
   }
 }

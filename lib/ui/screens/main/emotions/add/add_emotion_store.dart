@@ -15,6 +15,8 @@ abstract class AddEmotionViewModel extends BaseViewModel {
 
   EmotionNote get emotionNote;
 
+  List<Emotion> get selectedEmotions;
+
   List<Emotion> get foundEmotions;
 
   int get currentStep;
@@ -52,6 +54,8 @@ class AddEmotionStore extends _AddEmotionStore with _$AddEmotionStore {
 abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
   final AppRouter _appRouter;
   final EmotionNotesInteractor _interactor;
+  var _editMode = false;
+  EmotionNote _emotionNote = EmotionNote.empty();
 
   _AddEmotionStore(
     this._appRouter,
@@ -61,8 +65,11 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
     updateDataIfEditMode(note);
   }
 
+  @override
+  EmotionNote get emotionNote => _emotionNote;
+
   @readonly
-  EmotionNote _emotionNote = EmotionNote.empty();
+  List<Emotion> _selectedEmotions = [];
 
   @readonly
   ChooseEmotionState _state = ChooseEmotionState.initial;
@@ -79,11 +86,12 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
   @action
   @override
   void onEmotionSelected(Emotion emotion) {
-    if (!_emotionNote.emotions.contains(emotion)) {
-      _emotionNote = _emotionNote.copyWith(emotions: _emotionNote.emotions..add(emotion));
+    if (!_selectedEmotions.contains(emotion)) {
+      _selectedEmotions = _selectedEmotions..add(emotion);
     } else {
-      _emotionNote = _emotionNote.copyWith(emotions: _emotionNote.emotions..remove(emotion));
+      _selectedEmotions = _selectedEmotions..remove(emotion);
     }
+    _emotionNote = _emotionNote.copyWith(emotions: _selectedEmotions);
   }
 
   @action
@@ -143,8 +151,11 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
       onError(Strings.addEmotion.emptyTitle());
       return;
     }
-    // TODO update if edit mode
-    await _interactor.addNote(_emotionNote);
+    if (_editMode) {
+      await _interactor.updateNote(_emotionNote);
+    } else {
+      await _interactor.addNote(_emotionNote);
+    }
     dispose();
     _appRouter.pop();
   }
@@ -160,7 +171,9 @@ abstract class _AddEmotionStore with Store implements AddEmotionViewModel {
 
   void updateDataIfEditMode(EmotionNote? note) {
     if (note == null) return;
+    _editMode = true;
     _emotionNote = note;
+    _selectedEmotions = note.emotions;
   }
 }
 

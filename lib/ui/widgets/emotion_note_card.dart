@@ -63,6 +63,7 @@ class EmotionNoteCard extends StatelessWidget {
                   value: e,
                   toText: (e) => e.text,
                   selected: true,
+                  primaryColor: e.color,
                 ),
               ),
             )

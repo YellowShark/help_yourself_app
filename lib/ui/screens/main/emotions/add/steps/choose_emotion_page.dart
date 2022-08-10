@@ -13,6 +13,7 @@ class ChooseEmotionPage extends StatelessWidget {
   final ChooseEmotionState state;
   final EmotionNote currentNote;
   final List<Emotion> foundEmotions;
+  final List<Emotion> selectedEmotions;
   final EmotionsCategory selectedCategory;
   final void Function(Emotion emotion) onEmotionSelected;
   final void Function(EmotionsCategory category) onCategorySelected;
@@ -26,6 +27,7 @@ class ChooseEmotionPage extends StatelessWidget {
     required this.currentNote,
     required this.foundEmotions,
     required this.selectedCategory,
+    required this.selectedEmotions,
     required this.onEmotionSelected,
     required this.onCategorySelected,
     required this.onSearch,
@@ -59,7 +61,7 @@ class ChooseEmotionPage extends StatelessWidget {
                     toText: (e) => e.text,
                     selected: e == selectedCategory,
                     onClick: onCategorySelected,
-                    primaryColor: Theme.of(context).primaryColor,
+                    primaryColor: selectedCategory.color,
                   ),
                 ))
             .toList(),
@@ -80,7 +82,8 @@ class ChooseEmotionPage extends StatelessWidget {
                 value: e,
                 toText: (e) => e.text,
                 onClick: onEmotionSelected,
-                selected: currentNote.emotions.contains(e),
+                selected: selectedEmotions.contains(e),
+                primaryColor: selectedCategory.color,
                 onLongPress: (e) {
                   _dialog = _createPopupDialog(e);
                   Overlay.of(context)?.insert(_dialog!);

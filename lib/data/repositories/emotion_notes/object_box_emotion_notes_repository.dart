@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:help_yourself_app/data/entity/emotion_note/emotion_note_entity.dart';
 import 'package:help_yourself_app/data/extensions/entity_to_model.dart';
 import 'package:help_yourself_app/data/extensions/model_to_entity.dart';
@@ -20,7 +22,19 @@ class ObjectBoxEmotionNotesRepository extends EmotionNotesRepository {
   Future addNote(EmotionNote note) => _box.putAsync(note.toEntity());
 
   @override
-  Stream<List<EmotionNote>> getAllNotes() => _box.query()
+  Future updateNote(EmotionNote note) => _store.runIsolated<EmotionNote, void>(
+        TxMode.write,
+        (store, note) {
+          final box = store.box<EmotionNoteEntity>();
+          box.remove(note.id);
+          box.putAsync(note.toEntity());
+        },
+        note,
+      );
+
+  @override
+  Stream<List<EmotionNote>> getAllNotes() => _box
+      .query()
       .watch(triggerImmediately: true)
       .map((query) => query.find().map((entity) => entity.toModel()).toList());
 }

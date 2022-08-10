@@ -31,6 +31,7 @@ class AddEmotionPage extends BasePage<AddEmotionViewModel> {
             state: viewModel.state,
             currentNote: viewModel.emotionNote,
             foundEmotions: viewModel.foundEmotions,
+            selectedEmotions: viewModel.selectedEmotions,
             onEmotionSelected: viewModel.onEmotionSelected,
             onSearch: viewModel.onSearch,
             selectedCategory: viewModel.selectedCategory,
