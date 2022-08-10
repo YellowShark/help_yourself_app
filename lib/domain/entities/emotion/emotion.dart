@@ -1,4 +1,7 @@
+import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 import 'package:help_yourself_app/common/res/strings.dart';
+import 'package:help_yourself_app/domain/entities/emotion/emotions_category.dart';
 
 enum Emotion {
   // Positive emotions
@@ -41,7 +44,7 @@ enum Emotion {
 
 extension EmotionExt on Emotion {
   String get text {
-    switch(this) {
+    switch (this) {
       case Emotion.gratitude:
         return Strings.emotions.gratitude();
       case Emotion.cheerfulness:
@@ -112,7 +115,7 @@ extension EmotionExt on Emotion {
   }
 
   String get description {
-    switch(this) {
+    switch (this) {
       case Emotion.gratitude:
         return Strings.emotionDescriptions.gratitude();
       case Emotion.cheerfulness:
@@ -181,6 +184,8 @@ extension EmotionExt on Emotion {
         return Strings.emotionDescriptions.embarrassment();
     }
   }
+
+  Color? get color => EmotionsCategory.values.firstWhereOrNull((c) => c.appropriateEmotions.contains(this))?.color;
 }
 
 abstract class EmotionsProvider {

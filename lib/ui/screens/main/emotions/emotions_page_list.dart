@@ -26,7 +26,10 @@ class EmotionsPageList extends BasePage<EmotionsViewModel> {
       builder: (_) => ListView.separated(
         itemCount: viewModel.notes.length,
         separatorBuilder: (_, __) => const VerticalDivider(),
-        itemBuilder: (BuildContext context, int index) => EmotionNoteCard(note: viewModel.notes[index]),
+        itemBuilder: (BuildContext context, int index) => EmotionNoteCard(
+          note: viewModel.notes[index],
+          onClick: viewModel.onEditClick,
+        ),
       ),
     );
   }

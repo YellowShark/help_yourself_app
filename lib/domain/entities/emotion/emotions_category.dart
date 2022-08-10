@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:help_yourself_app/common/res/colors.dart';
 import 'package:help_yourself_app/common/res/strings.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
 
@@ -22,6 +24,15 @@ extension CategoryExt on EmotionsCategory {
         return EmotionsProvider.positiveEmotions;
       case EmotionsCategory.negative:
         return EmotionsProvider.negativeEmotions;
+    }
+  }
+
+  Color get color {
+    switch(this) {
+      case EmotionsCategory.positive:
+        return AppColors.softPink;
+      case EmotionsCategory.negative:
+        return Colors.indigoAccent;
     }
   }
 }

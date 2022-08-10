@@ -23,7 +23,7 @@ abstract class Dimens {
 }
 
 extension DimensExt on double {
-  Widget spacer() => SizedBox(
-        height: this,
-      );
+  Widget spacer() => SizedBox(height: this);
+
+  Widget horizontalSpacer() => SizedBox(width: this);
 }
