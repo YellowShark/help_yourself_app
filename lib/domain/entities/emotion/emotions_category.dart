@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_yourself_app/common/res/colors.dart';
 import 'package:help_yourself_app/common/res/strings.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
 
@@ -29,7 +30,7 @@ extension CategoryExt on EmotionsCategory {
   Color get color {
     switch(this) {
       case EmotionsCategory.positive:
-        return const Color(0xFFff6666);
+        return AppColors.softPink;
       case EmotionsCategory.negative:
         return Colors.indigoAccent;
     }

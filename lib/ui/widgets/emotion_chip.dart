@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_yourself_app/common/res/colors.dart';
 import 'package:help_yourself_app/common/res/dimens.dart';
 
 class AppChip<T> extends StatelessWidget {
@@ -44,7 +45,7 @@ class AppChip<T> extends StatelessWidget {
           style: Theme.of(context).textTheme.subtitle2?.copyWith(color: selected ? Colors.white : Colors.black),
         ),
         backgroundColor: selected ? primaryColor : secondaryColor,
-        side: BorderSide(color: primaryColor ?? const Color(0xFFff6666)),
+        side: BorderSide(color: primaryColor ?? AppColors.softPink),
         elevation: Dimens.smallElevation,
         shadowColor: _shadowColor,
       ),
