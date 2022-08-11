@@ -3,6 +3,7 @@ import 'package:help_yourself_app/common/res/strings.dart';
 import 'package:help_yourself_app/ui/base/base_page.dart';
 import 'package:help_yourself_app/ui/screens/home/home_page.dart';
 import 'package:help_yourself_app/ui/screens/main/emotions/emotions_page_list.dart';
+import 'package:help_yourself_app/ui/screens/main/video/video_recommendations_page.dart';
 
 enum Screens {
   emotionsList,
@@ -16,7 +17,7 @@ extension ScreensExt on Screens {
       case Screens.emotionsList:
         return EmotionsPageList();
       case Screens.videos:
-        return HomePage();
+        return VideoRecommendationsPage();
       case Screens.profile:
         return HomePage();
     }

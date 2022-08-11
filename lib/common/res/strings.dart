@@ -8,6 +8,7 @@ abstract class Strings {
     static final video = VideoScreenStrings();
     static final emotions = EmotionsString();
     static final emotionDescriptions = EmotionDescriptionsString();
+    static final videoRecommendations = VideoRecommendationsPageStrings();
 }
 
 class EmotionDescriptionsString {
@@ -118,3 +119,21 @@ class VideoScreenStrings {
   String videoChannel() => Intl.message('Автор');
 
 }
+
+class VideoRecommendationsPageStrings {
+  String title() => Intl.message('Рекомендации');
+  String depression() => Intl.message('Депрессия');
+  String anxietyDisorder() => Intl.message('Тревожное\nрасстройство');
+  String personalityDisorders() => Intl.message('Расстройства\nличности');
+  String nutrition() => Intl.message('Питание');
+  String upbringing() => Intl.message('Воспитание\nдетей');
+  String insult() => Intl.message('Обиды');
+  String neurosis() => Intl.message('Неврозы');
+  String communication() => Intl.message('Коммуникация');
+  String relations() => Intl.message('Отношения');
+  String stressTolerance() => Intl.message('Стрессо\nустойчивость');
+  String emotionManagement() => Intl.message('Управление\nэмоциями');
+  String borderlinePersonalityDisorder() => Intl.message('Пограничное\nрасстройство');
+
+}
+
