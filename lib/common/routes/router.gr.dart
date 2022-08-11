@@ -27,7 +27,8 @@ class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<AddEmotionRouteArgs>(
           orElse: () => const AddEmotionRouteArgs());
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: AddEmotionPage(key: args.key));
+          routeData: routeData,
+          child: AddEmotionPage(key: args.key, note: args.note));
     },
     MainRoute.name: (routeData) {
       final args =
@@ -76,21 +77,24 @@ class HomeRouteArgs {
 /// generated route for
 /// [AddEmotionPage]
 class AddEmotionRoute extends PageRouteInfo<AddEmotionRouteArgs> {
-  AddEmotionRoute({Key? key})
+  AddEmotionRoute({Key? key, EmotionNote? note})
       : super(AddEmotionRoute.name,
-            path: '/add-emotion-page', args: AddEmotionRouteArgs(key: key));
+            path: '/add-emotion-page',
+            args: AddEmotionRouteArgs(key: key, note: note));
 
   static const String name = 'AddEmotionRoute';
 }
 
 class AddEmotionRouteArgs {
-  const AddEmotionRouteArgs({this.key});
+  const AddEmotionRouteArgs({this.key, this.note});
 
   final Key? key;
 
+  final EmotionNote? note;
+
   @override
   String toString() {
-    return 'AddEmotionRouteArgs{key: $key}';
+    return 'AddEmotionRouteArgs{key: $key, note: $note}';
   }
 }
 

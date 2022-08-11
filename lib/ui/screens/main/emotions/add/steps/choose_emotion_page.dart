@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:help_yourself_app/common/res/dimens.dart';
 import 'package:help_yourself_app/common/res/strings.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
+import 'package:help_yourself_app/domain/entities/emotion/emotion_note.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotions_category.dart';
 import 'package:help_yourself_app/ui/screens/main/emotions/add/add_emotion_store.dart';
 import 'package:help_yourself_app/ui/widgets/animated_dialog.dart';
@@ -10,8 +11,9 @@ import 'package:help_yourself_app/ui/widgets/emotion_chip.dart';
 
 class ChooseEmotionPage extends StatelessWidget {
   final ChooseEmotionState state;
-  final List<Emotion> selectedEmotions;
+  final EmotionNote currentNote;
   final List<Emotion> foundEmotions;
+  final List<Emotion> selectedEmotions;
   final EmotionsCategory selectedCategory;
   final void Function(Emotion emotion) onEmotionSelected;
   final void Function(EmotionsCategory category) onCategorySelected;
@@ -22,9 +24,10 @@ class ChooseEmotionPage extends StatelessWidget {
   ChooseEmotionPage({
     Key? key,
     required this.state,
-    required this.selectedEmotions,
+    required this.currentNote,
     required this.foundEmotions,
     required this.selectedCategory,
+    required this.selectedEmotions,
     required this.onEmotionSelected,
     required this.onCategorySelected,
     required this.onSearch,
@@ -58,7 +61,7 @@ class ChooseEmotionPage extends StatelessWidget {
                     toText: (e) => e.text,
                     selected: e == selectedCategory,
                     onClick: onCategorySelected,
-                    primaryColor: Theme.of(context).primaryColor,
+                    primaryColor: selectedCategory.color,
                   ),
                 ))
             .toList(),
@@ -80,6 +83,7 @@ class ChooseEmotionPage extends StatelessWidget {
                 toText: (e) => e.text,
                 onClick: onEmotionSelected,
                 selected: selectedEmotions.contains(e),
+                primaryColor: selectedCategory.color,
                 onLongPress: (e) {
                   _dialog = _createPopupDialog(e);
                   Overlay.of(context)?.insert(_dialog!);

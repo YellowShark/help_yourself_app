@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:help_yourself_app/domain/entities/emotion/emotion_note.dart';
 import 'package:help_yourself_app/ui/screens/home/home_page.dart';
 import 'package:help_yourself_app/ui/screens/main/emotions/add/add_emotion_page.dart';
 import 'package:help_yourself_app/ui/screens/main/emotions/emotions_page_list.dart';

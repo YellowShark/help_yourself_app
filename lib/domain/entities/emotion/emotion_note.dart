@@ -8,7 +8,7 @@ class EmotionNote {
   final int date;
 
   EmotionNote({
-    this.id = 0,
+    required this.id,
     required this.emotions,
     required this.name,
     required this.comment,
@@ -16,6 +16,7 @@ class EmotionNote {
   });
 
   factory EmotionNote.empty() => EmotionNote(
+        id: 0,
         emotions: [],
         name: '',
         comment: '',
@@ -23,12 +24,14 @@ class EmotionNote {
       );
 
   EmotionNote copyWith({
+    int? id,
     List<Emotion>? emotions,
     String? name,
     String? comment,
     int? date,
   }) =>
       EmotionNote(
+        id: id ?? this.id,
         emotions: emotions ?? this.emotions,
         name: name ?? this.name,
         comment: comment ?? this.comment,
@@ -37,6 +40,6 @@ class EmotionNote {
 
   @override
   String toString() {
-    return 'EmotionNote{emotions: $emotions, name: $name, comment: $comment, date: $date}';
+    return 'EmotionNote{id: $id, emotions: $emotions, name: $name, comment: $comment, date: $date}';
   }
 }

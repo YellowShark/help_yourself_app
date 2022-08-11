@@ -13,6 +13,7 @@ abstract class EmotionsViewModel extends BaseViewModel {
   List<EmotionNote> get notes;
   void onCreateClick();
   Future updateNotes();
+  void onEditClick(EmotionNote note);
 }
 
 @Injectable(as: EmotionsViewModel)
@@ -37,6 +38,11 @@ abstract class _EmotionsStore with Store implements EmotionsViewModel {
     _appRouter.push(AddEmotionRoute());
   }
 
+  @override
+  void onEditClick(EmotionNote note) {
+    _appRouter.push(AddEmotionRoute(note: note));
+  }
+
   @action
   @override
   Future updateNotes() async {
@@ -48,7 +54,7 @@ abstract class _EmotionsStore with Store implements EmotionsViewModel {
 
   Future _initNotes() async {
     _interactor.getAllNotes().listen((notes) {
-      _notes = notes;
+      _notes = notes..sort((e1, e2) => e1.date.compareTo(e2.date))..reversed;
     });
   }
 }
