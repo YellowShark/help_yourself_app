@@ -1,7 +1,7 @@
 import 'package:help_yourself_app/common/routes/router.dart';
 import 'package:help_yourself_app/ui/base/base_page.dart';
 import 'package:help_yourself_app/ui/base/base_view_model.dart';
-import 'package:help_yourself_app/ui/screens/main/emotions/screens.dart';
+import 'package:help_yourself_app/ui/screens/main/screens.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 

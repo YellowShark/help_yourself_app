@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:help_yourself_app/ui/base/base_page.dart';
-import 'package:help_yourself_app/ui/screens/main/emotions/screens.dart';
+import 'package:help_yourself_app/ui/screens/main/screens.dart';
 import 'package:help_yourself_app/ui/screens/main/main_store.dart';
 
 class MainPage extends BasePage<MainViewModel> {
