@@ -16,18 +16,16 @@ class VideoRecommendationsPage extends BasePage<VideoRecommendationsViewModel> {
   @override
   Widget content(BuildContext context) {
     return GridView.builder(
-      itemCount: 14,
+      itemCount: 12,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 2,
       ),
       itemBuilder: (BuildContext context, int index) {
         return ColoredButton(
-            //onPressed: () {Navigator.pushNamed(context, 'route', arguments: index);},
-          onPressed: (){Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => VideosForVideoRecommendations(index: index)),
-          );},
+            onPressed: () {
+              // TODO migrate to AutoRoute.
+            },
             child: Text(
               forVideoRecommendationsPage[index].mood,
               textAlign: TextAlign.center,
@@ -49,9 +47,6 @@ class ForVideoRecommendationsPage {
   final String mood;
   final Color color;
   final String videoID;
-
-// void goToPage() {}
-
 }
 
 List forVideoRecommendationsPage = [
@@ -96,10 +91,6 @@ List forVideoRecommendationsPage = [
       color: Colors.deepPurpleAccent,
       videoID: '5SdnWSZuVJM'),
   ForVideoRecommendationsPage(
-      mood: Strings.videoRecommendations.lecturesPsychoanalysis(),
-      color: Colors.amber,
-      videoID: 'RNeeBHcOPIU'),
-  ForVideoRecommendationsPage(
       mood: Strings.videoRecommendations.personalityDisorders(),
       color: Colors.teal,
       videoID: 'pzNqzCzdvMs'),
@@ -107,8 +98,4 @@ List forVideoRecommendationsPage = [
       mood: Strings.videoRecommendations.borderlinePersonalityDisorder(),
       color: Colors.pinkAccent,
       videoID: '5Yz-Bvm5tRg'),
-  ForVideoRecommendationsPage(
-      mood: Strings.videoRecommendations.everydayLife(),
-      color: Colors.redAccent,
-      videoID: 'GE-I-abl4Ss')
 ];

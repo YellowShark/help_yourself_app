@@ -134,7 +134,6 @@ class VideoRecommendationsPageStrings {
   String stressTolerance() => Intl.message('Стрессо\nустойчивость');
   String emotionManagement() => Intl.message('Управление\nэмоциями');
   String borderlinePersonalityDisorder() => Intl.message('Пограничное\nрасстройство');
-  String lecturesPsychoanalysis() => Intl.message('Лекции по\nпсихоанализу');
-  String everydayLife() => Intl.message('Будни\nпсихиаторов');
+
 }
 
