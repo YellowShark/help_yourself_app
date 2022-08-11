@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ColoredButton extends StatelessWidget {
-  const ColoredButton(
-      {required this.child,
-        required this.onPressed,
-        required this.color,
-        super.key});
+  const ColoredButton({
+    Key? key,
+    required this.child,
+    required this.onPressed,
+    required this.color,
+  }) : super(key: key);
 
   final Widget child;
   final void Function() onPressed;
