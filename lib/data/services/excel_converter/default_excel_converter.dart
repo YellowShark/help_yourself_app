@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:help_yourself_app/common/utils/extensions.dart';
+import 'package:help_yourself_app/data/services/excel_converter/excel_extension.dart';
+import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion_note.dart';
 import 'package:help_yourself_app/domain/services/excel_converter/excel_converter.dart';
 import 'package:injectable/injectable.dart';
@@ -29,10 +32,31 @@ class DefaultExcelConverter extends ExcelConverter {
 
   void _populateTable(Excel excel, List<EmotionNote> notes) {
     final sheet = excel['Sheet1'];
-    sheet.updateCell(CellIndex.indexByString('A1'), 'Дата');
-    sheet.updateCell(CellIndex.indexByString('B1'), 'Событие');
-    sheet.updateCell(CellIndex.indexByString('C1'), 'Эмоции');
-    sheet.updateCell(CellIndex.indexByString('D1'), 'Комментарий');
-    // TODO write all info
+    sheet.initRows([
+      RowSettings('Дата', 20),
+      RowSettings('Событие', 30),
+      RowSettings('Эмоции', 35),
+      RowSettings('Комментарий', 40),
+    ]);
+
+    var currIndex = 2;
+    notes.forEach((note) {
+      sheet
+        ..updateCellByString('${tableRows[0]}$currIndex', note.date.toFormattedDate())
+        ..updateCellByString('${tableRows[1]}$currIndex', note.name)
+        ..updateCellByString('${tableRows[3]}$currIndex', note.comment);
+
+      final oldIndex = currIndex;
+      note.emotions.forEach((e) {
+        sheet.updateCellByString('${tableRows[2]}$currIndex', e.text);
+        currIndex++;
+      });
+      sheet.mergeRows(
+        [0, 1, 3],
+        oldIndex,
+        currIndex - 1,
+      );
+      currIndex++;
+    });
   }
 }
