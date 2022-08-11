@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_yourself_app/ui/screens/main/video/video_recommendation_group.dart';
 import 'package:help_yourself_app/ui/screens/main/video/video_recommendations_page.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -31,6 +32,13 @@ class _VideosForVideoRecommendationsState
           InkWell(
             onTap: () {
               // TODO migrate to AutoRoute.
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => VideoPlayer(
+                        video:
+                            forVideoRecommendationsPage[widget.index].videoID)),
+              );
             },
             child: Container(
               width: widthScreen,
