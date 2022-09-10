@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:collection/collection.dart';
 import 'package:excel/excel.dart';
 
@@ -13,9 +15,12 @@ class RowSettings {
 }
 
 extension SheetExt on Sheet {
+  // We need this because of library bug.
+  double get _randomEps => Random().nextDouble() * 10;
+
   void initRows(List<RowSettings> settings) => settings.forEachIndexed((i, item) {
         updateCellByString('${tableRows[i]}1', settings[i].name, style: _defaultTitleStyle);
-        setColWidth(CellIndex.indexByString('${tableRows[i]}1').columnIndex, settings[i].width);
+        setColWidth(CellIndex.indexByString('${tableRows[i]}1').columnIndex, settings[i].width + _randomEps);
       });
 
   void updateCellByString(String index, String value, {CellStyle? style}) =>

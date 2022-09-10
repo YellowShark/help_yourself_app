@@ -1,3 +1,4 @@
+import 'package:help_yourself_app/common/res/strings.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
 
 class EmotionNote {
@@ -42,4 +43,11 @@ class EmotionNote {
   String toString() {
     return 'EmotionNote{id: $id, emotions: $emotions, name: $name, comment: $comment, date: $date}';
   }
+
+  static List<String> getTitles() => [
+        Strings.excelTable.date(),
+        Strings.excelTable.event(),
+        Strings.excelTable.emotions(),
+        Strings.excelTable.comment(),
+      ];
 }

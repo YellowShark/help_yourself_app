@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:help_yourself_app/common/utils/extensions.dart';
+import 'package:help_yourself_app/data/services/excel_converter/excel_defaults.dart';
 import 'package:help_yourself_app/data/services/excel_converter/excel_extension.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion.dart';
 import 'package:help_yourself_app/domain/entities/emotion/emotion_note.dart';
@@ -31,32 +33,29 @@ class DefaultExcelConverter extends ExcelConverter {
   }
 
   void _populateTable(Excel excel, List<EmotionNote> notes) {
-    final sheet = excel['Sheet1'];
-    sheet.initRows([
-      RowSettings('Дата', 20),
-      RowSettings('Событие', 30),
-      RowSettings('Эмоции', 35),
-      RowSettings('Комментарий', 40),
-    ]);
+    final sheet = excel[ExcelDefaults.sheetName];
+    sheet.initRows(EmotionNote.getTitles().map((e) => RowSettings(e, ExcelDefaults.colWidth)).toList());
 
-    var currIndex = 2;
-    notes.forEach((note) {
-      sheet
-        ..updateCellByString('${tableRows[0]}$currIndex', note.date.toFormattedDate())
-        ..updateCellByString('${tableRows[1]}$currIndex', note.name)
-        ..updateCellByString('${tableRows[3]}$currIndex', note.comment);
+    var currIndex = ExcelDefaults.initialDataPosition;
+    notes.forEachIndexed(
+      (i, note) {
+        sheet
+          ..updateCellByString('${tableRows[0]}$currIndex', note.date.toFormattedDate())
+          ..updateCellByString('${tableRows[1]}$currIndex', note.name)
+          ..updateCellByString('${tableRows[3]}$currIndex', note.comment);
 
-      final oldIndex = currIndex;
-      note.emotions.forEach((e) {
-        sheet.updateCellByString('${tableRows[2]}$currIndex', e.text);
+        final oldIndex = currIndex;
+        note.emotions.forEach((e) {
+          sheet.updateCellByString('${tableRows[2]}$currIndex', e.text);
+          currIndex++;
+        });
+        sheet.mergeRows(
+          [0, 1, 3],
+          oldIndex,
+          currIndex - 1,
+        );
         currIndex++;
-      });
-      sheet.mergeRows(
-        [0, 1, 3],
-        oldIndex,
-        currIndex - 1,
-      );
-      currIndex++;
-    });
+      },
+    );
   }
 }
