@@ -6,11 +6,11 @@ part of 'add_emotion_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$AddEmotionStore on _AddEmotionStore, Store {
-  final _$_selectedEmotionsAtom =
-      Atom(name: '_AddEmotionStore._selectedEmotions');
+  late final _$_selectedEmotionsAtom =
+      Atom(name: '_AddEmotionStore._selectedEmotions', context: context);
 
   List<Emotion> get selectedEmotions {
     _$_selectedEmotionsAtom.reportRead();
@@ -27,7 +27,8 @@ mixin _$AddEmotionStore on _AddEmotionStore, Store {
     });
   }
 
-  final _$_stateAtom = Atom(name: '_AddEmotionStore._state');
+  late final _$_stateAtom =
+      Atom(name: '_AddEmotionStore._state', context: context);
 
   ChooseEmotionState get state {
     _$_stateAtom.reportRead();
@@ -44,7 +45,8 @@ mixin _$AddEmotionStore on _AddEmotionStore, Store {
     });
   }
 
-  final _$_foundEmotionsAtom = Atom(name: '_AddEmotionStore._foundEmotions');
+  late final _$_foundEmotionsAtom =
+      Atom(name: '_AddEmotionStore._foundEmotions', context: context);
 
   List<Emotion> get foundEmotions {
     _$_foundEmotionsAtom.reportRead();
@@ -61,8 +63,8 @@ mixin _$AddEmotionStore on _AddEmotionStore, Store {
     });
   }
 
-  final _$_selectedCategoryAtom =
-      Atom(name: '_AddEmotionStore._selectedCategory');
+  late final _$_selectedCategoryAtom =
+      Atom(name: '_AddEmotionStore._selectedCategory', context: context);
 
   EmotionsCategory get selectedCategory {
     _$_selectedCategoryAtom.reportRead();
@@ -79,7 +81,8 @@ mixin _$AddEmotionStore on _AddEmotionStore, Store {
     });
   }
 
-  final _$_currentStepAtom = Atom(name: '_AddEmotionStore._currentStep');
+  late final _$_currentStepAtom =
+      Atom(name: '_AddEmotionStore._currentStep', context: context);
 
   int get currentStep {
     _$_currentStepAtom.reportRead();
@@ -96,8 +99,8 @@ mixin _$AddEmotionStore on _AddEmotionStore, Store {
     });
   }
 
-  final _$_AddEmotionStoreActionController =
-      ActionController(name: '_AddEmotionStore');
+  late final _$_AddEmotionStoreActionController =
+      ActionController(name: '_AddEmotionStore', context: context);
 
   @override
   void onEmotionSelected(Emotion emotion) {

@@ -14,6 +14,7 @@ abstract class EmotionsViewModel extends BaseViewModel {
   void onCreateClick();
   Future updateNotes();
   void onEditClick(EmotionNote note);
+  void onShare();
 }
 
 @Injectable(as: EmotionsViewModel)
@@ -47,6 +48,11 @@ abstract class _EmotionsStore with Store implements EmotionsViewModel {
   @override
   Future updateNotes() async {
     await _initNotes();
+  }
+
+  @override
+  void onShare() async {
+    await _interactor.shareNotes(notes);
   }
 
   @override

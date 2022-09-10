@@ -9,6 +9,14 @@ abstract class Strings {
     static final emotions = EmotionsString();
     static final emotionDescriptions = EmotionDescriptionsString();
     static final videoRecommendations = VideoRecommendationsPageStrings();
+    static final excelTable = ExcelTableStrings();
+}
+
+class ExcelTableStrings {
+  String date() => Intl.message('Дата');
+  String event() => Intl.message('Событие');
+  String emotions() => Intl.message('Эмоции');
+  String comment() => Intl.message('Комментарий');
 }
 
 class EmotionDescriptionsString {

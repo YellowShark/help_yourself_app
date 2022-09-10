@@ -6,10 +6,11 @@ part of 'emotions_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$EmotionsStore on _EmotionsStore, Store {
-  final _$_notesAtom = Atom(name: '_EmotionsStore._notes');
+  late final _$_notesAtom =
+      Atom(name: '_EmotionsStore._notes', context: context);
 
   List<EmotionNote> get notes {
     _$_notesAtom.reportRead();
@@ -26,7 +27,8 @@ mixin _$EmotionsStore on _EmotionsStore, Store {
     });
   }
 
-  final _$updateNotesAsyncAction = AsyncAction('_EmotionsStore.updateNotes');
+  late final _$updateNotesAsyncAction =
+      AsyncAction('_EmotionsStore.updateNotes', context: context);
 
   @override
   Future<dynamic> updateNotes() {
